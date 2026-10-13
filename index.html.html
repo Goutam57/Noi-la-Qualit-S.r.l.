@@ -1,0 +1,3590 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Noi, la qualità srl — Golosaqualità. Selezione premium di prodotti italiani: pasta, riso, salumi, formaggi, miele, sottoli, tartufi e alcolici.">
+  <title>Golosaqualità · Noi, la qualità srl</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ============================================================
+       RESET & ROOT — PALETTE FROM LOGO
+       ============================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Logo-derived palette */
+      --teal: #4FB3A8;         /* from logo left wave */
+      --teal-dark: #2E8A80;
+      --teal-light: #7FCFC6;
+      --blue: #1E5AA8;         /* from logo sphere */
+      --blue-dark: #154278;
+      --blue-light: #4A85CC;
+      --navy: #1A3A6B;         /* logo text */
+      --gold: #F4B942;         /* from logo right wave */
+      --gold-dark: #D89A1F;
+      --gold-light: #FBD07A;
+      --red: #C41E2E;          /* Golosaqualità brand red */
+      --red-dark: #9C1423;
+      --red-light: #E84152;
+      --green: #1E8A3C;        /* Golosaqualità brand green */
+      --green-dark: #146B2C;
+
+      /* Neutrals */
+      --ink: #0F1B2D;
+      --ink-soft: #1E2F4A;
+      --cream: #FBF8F2;
+      --cream-warm: #F5EEE0;
+      --cream-deep: #EBE0CC;
+      --stone: #B8AA9C;
+      --white: #FFFFFF;
+
+      --shadow-xs: 0 2px 8px rgba(15,27,45,0.04);
+      --shadow-sm: 0 6px 18px rgba(15,27,45,0.07), 0 2px 6px rgba(15,27,45,0.03);
+      --shadow-md: 0 20px 40px -12px rgba(15,27,45,0.14), 0 8px 16px -6px rgba(15,27,45,0.06);
+      --shadow-lg: 0 40px 80px -20px rgba(15,27,45,0.22), 0 15px 30px -10px rgba(15,27,45,0.08);
+
+      --radius-xs: 6px;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --radius-xl: 44px;
+
+      --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+      --font-serif: 'Playfair Display', serif;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+
+      --header-h: 68px;
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body.no-scroll { overflow: hidden; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       PRELOADER — BRANDED LOADING SEQUENCE
+       ============================================================ */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(ellipse at center, var(--ink-soft) 0%, var(--ink) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: opacity 0.7s var(--ease-lux), visibility 0.7s var(--ease-lux);
+    }
+    .preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .preloader-bg { position: absolute; inset: 0; overflow: hidden; }
+
+    /* Wave decorations mirroring logo */
+    .preloader-wave {
+      position: absolute;
+      height: 3px;
+      border-radius: 3px;
+      opacity: 0.5;
+      animation: waveSlide 3s ease-in-out infinite;
+    }
+    .preloader-wave.teal { background: var(--teal); top: 25%; left: -30%; width: 30%; }
+    .preloader-wave.blue { background: var(--blue-light); top: 45%; left: -30%; width: 45%; animation-delay: 0.5s; }
+    .preloader-wave.gold { background: var(--gold); top: 65%; left: -30%; width: 35%; animation-delay: 1s; }
+    .preloader-wave.red { background: var(--red); top: 82%; left: -30%; width: 25%; animation-delay: 1.5s; }
+
+    @keyframes waveSlide {
+      0% { transform: translateX(0); opacity: 0; }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.6; }
+      100% { transform: translateX(430%); opacity: 0; }
+    }
+
+    .preloader-particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--gold);
+      opacity: 0;
+      animation: particleFloat 3.5s ease-in-out infinite;
+    }
+    @keyframes particleFloat {
+      0% { opacity: 0; transform: translateY(0) scale(0); }
+      30% { opacity: 1; transform: translateY(-40px) scale(1); }
+      100% { opacity: 0; transform: translateY(-120px) scale(0.4); }
+    }
+
+    .preloader-inner {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+      padding: 0 24px;
+    }
+
+    .preloader-logo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-shadow:
+        0 20px 60px -15px rgba(30,90,168,0.7),
+        0 0 0 0 rgba(244,185,66,0.5);
+      animation: logoPulse 1.8s var(--ease-lux) infinite;
+      position: relative;
+    }
+
+    .preloader-logo::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px dashed rgba(244,185,66,0.3);
+      animation: spinSlow 12s linear infinite;
+    }
+
+    .preloader-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 20px 60px -15px rgba(30,90,168,0.7), 0 0 0 0 rgba(244,185,66,0.5); }
+      50% { box-shadow: 0 20px 60px -15px rgba(30,90,168,0.9), 0 0 0 22px rgba(244,185,66,0); }
+    }
+
+    @keyframes spinSlow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+    .preloader-brand {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-lux) 0.3s forwards;
+    }
+
+    .preloader-brand .golosa { color: var(--red-light); }
+    .preloader-brand .quality { color: var(--green); }
+
+    .preloader-brand small {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-top: 8px;
+      opacity: 0.85;
+    }
+
+    .preloader-progress {
+      width: 260px;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 0.5s forwards;
+      position: relative;
+    }
+
+    .preloader-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--teal), var(--blue), var(--gold), var(--red));
+      border-radius: 3px;
+      animation: barFill 1.6s var(--ease-lux) forwards;
+      box-shadow: 0 0 20px rgba(244,185,66,0.6);
+    }
+
+    @keyframes barFill {
+      0% { width: 0; }
+      60% { width: 75%; }
+      100% { width: 100%; }
+    }
+
+    .preloader-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold-light);
+      opacity: 0;
+      letter-spacing: 0.06em;
+      animation: fadeIn 0.8s ease 0.7s forwards;
+      text-align: center;
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(244,185,66,0.4); } 50% { box-shadow: 0 0 0 16px rgba(244,185,66,0); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .container { max-width: 1440px; margin: 0 auto; padding: 0 28px; }
+    .container-narrow { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+    .eyebrow.gold { color: var(--gold-dark); }
+    .eyebrow.gold::before { background: var(--gold-dark); }
+    .eyebrow.teal { color: var(--teal-dark); }
+    .eyebrow.teal::before { background: var(--teal-dark); }
+    .eyebrow.blue { color: var(--blue); }
+    .eyebrow.blue::before { background: var(--blue); }
+
+    .display-title {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .display-title em {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--red);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: clamp(1.9rem, 4.2vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      opacity: 0.75;
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease-lux), transform 1s var(--ease-lux); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       HEADER — FLOATING GLASS PILL
+       ============================================================ */
+    .header-wrapper {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 14px 20px;
+      pointer-events: none;
+      transition: padding 0.5s var(--ease-lux);
+    }
+    .header-wrapper.scrolled { padding: 8px 20px; }
+
+    .header-pill {
+      max-width: 1440px;
+      margin: 0 auto;
+      pointer-events: auto;
+      position: relative;
+      background: rgba(251, 248, 242, 0.78);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border-radius: 100px;
+      border: 1px solid rgba(30,90,168,0.15);
+      box-shadow: 0 20px 50px -20px rgba(15,27,45,0.18), 0 4px 20px -6px rgba(15,27,45,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+      transition: all 0.5s var(--ease-lux);
+      overflow: visible;
+    }
+    .header-wrapper.scrolled .header-pill {
+      background: rgba(251, 248, 242, 0.95);
+      box-shadow: 0 24px 60px -20px rgba(15,27,45,0.24), 0 6px 24px -8px rgba(15,27,45,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+      border-color: rgba(30,90,168,0.28);
+    }
+
+    .header-pill::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 25%; right: 25%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--teal) 15%, var(--blue) 40%, var(--gold) 60%, var(--red) 85%, transparent);
+      background-size: 200% 100%;
+      border-radius: 3px;
+      animation: gradientShift 6s ease infinite;
+      opacity: 0.9;
+      transition: left 0.5s var(--ease-lux), right 0.5s var(--ease-lux);
+    }
+    .header-wrapper.scrolled .header-pill::before { left: 10%; right: 10%; }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 10px 16px;
+      gap: 18px;
+      min-height: 60px;
+    }
+
+    /* LOGO */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--ease-lux) 0.4s;
+      flex-shrink: 0;
+    }
+    .logo:hover { transform: scale(1.02); }
+
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      box-shadow: 0 6px 16px -6px rgba(30,90,168,0.35);
+      transition: var(--ease-lux) 0.5s;
+      flex-shrink: 0;
+    }
+    .logo:hover .logo-img {
+      transform: rotate(-6deg) scale(1.05);
+      box-shadow: 0 12px 24px -6px rgba(30,90,168,0.5);
+    }
+    .logo-img img { width: 100%; height: 100%; object-fit: contain; }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+    .logo-text .brand {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .logo-text .brand .golosa { color: var(--red); }
+    .logo-text .brand .quality { color: var(--green); }
+    .logo-text small {
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-top: 3px;
+    }
+
+    /* NAV */
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .nav-link {
+      position: relative;
+      padding: 9px 14px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      border-radius: 100px;
+      transition: var(--ease-soft) 0.3s;
+      white-space: nowrap;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--blue), var(--gold));
+      transition: width 0.4s var(--ease-lux);
+    }
+    .nav-link:hover { color: var(--blue); }
+    .nav-link:hover::after { width: 22px; }
+
+    /* HEADER ACTIONS */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      background: rgba(15,27,45,0.05);
+      border-radius: 100px;
+      padding: 3px;
+      position: relative;
+      border: 1px solid rgba(15,27,45,0.06);
+      cursor: pointer;
+      overflow: hidden;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .lang-toggle:hover { background: rgba(244,185,66,0.12); border-color: rgba(244,185,66,0.4); }
+
+    .lang-toggle .lang-slider {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: calc(50% - 3px);
+      height: calc(100% - 6px);
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      border-radius: 100px;
+      transition: transform 0.4s var(--ease-lux);
+      box-shadow: 0 4px 12px -2px rgba(30,90,168,0.5);
+      z-index: 0;
+    }
+    .lang-toggle.en-active .lang-slider { transform: translateX(100%); }
+
+    .lang-toggle span {
+      position: relative;
+      z-index: 1;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 6px 11px;
+      transition: color 0.3s;
+      color: var(--ink-soft);
+    }
+    .lang-toggle span.active { color: var(--white); }
+
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      transition: var(--ease-lux) 0.4s;
+      box-shadow: 0 8px 20px -6px rgba(30,90,168,0.4);
+      white-space: nowrap;
+    }
+    .btn-explore:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -8px rgba(30,90,168,0.5);
+    }
+    .btn-explore i { transition: transform 0.4s var(--ease-lux); }
+    .btn-explore:hover i { transform: translateX(4px); }
+
+    .menu-btn {
+      width: 42px; height: 42px;
+      border-radius: 100px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      border: 1px solid rgba(30,90,168,0.2);
+      box-shadow: 0 4px 14px -4px rgba(15,27,45,0.08);
+      transition: var(--ease-lux) 0.4s;
+      flex-shrink: 0;
+    }
+    .menu-btn:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -6px rgba(30,90,168,0.5);
+    }
+    .menu-btn .bar {
+      width: 16px; height: 1.8px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .menu-btn .bar:nth-child(2) { width: 11px; }
+    .menu-btn:hover .bar { background: var(--white); }
+    .menu-btn:hover .bar:nth-child(2) { width: 16px; }
+
+    /* Mobile contact — only on mobile */
+    .mobile-contact {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      flex-shrink: 0;
+    }
+    .mobile-contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s;
+    }
+    .mobile-contact a:hover { color: var(--blue); }
+    .mobile-contact i { color: var(--red); font-size: 0.75rem; }
+
+    @media (max-width: 1100px) {
+      .nav-main { display: none; }
+      .btn-explore span { display: none; }
+      .btn-explore { padding: 12px; }
+      .btn-explore i { font-size: 0.9rem; }
+    }
+    @media (max-width: 720px) {
+      .header-wrapper { padding: 10px 12px; }
+      .header-wrapper.scrolled { padding: 6px 12px; }
+      .header-pill { border-radius: 24px; }
+      .header-inner { padding: 8px 10px 8px 12px; gap: 12px; }
+      .logo-text small { display: none; }
+      .logo-text .brand { font-size: 0.9rem; }
+      .logo-img { width: 44px; height: 44px; }
+      .btn-explore { display: none; }
+      .mobile-contact { display: flex; }
+    }
+    @media (max-width: 440px) {
+      .mobile-contact .hide-xs { display: none; }
+    }
+
+    /* ============================================================
+       MARQUEE
+       ============================================================ */
+    .marquee-strip {
+      background: linear-gradient(90deg, var(--ink) 0%, var(--ink-soft) 50%, var(--ink) 100%);
+      color: var(--cream);
+      padding: 14px 0;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(244,185,66,0.15);
+      position: relative;
+      margin-top: 88px;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 50px;
+      animation: marquee 50s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+    .marquee-item i { color: var(--gold); font-size: 0.8rem; }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      position: relative;
+      padding: 70px 0 110px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(79,179,168,0.12), transparent 55%),
+        radial-gradient(ellipse at 85% 80%, rgba(30,90,168,0.10), transparent 55%),
+        radial-gradient(ellipse at 50% 0%, rgba(244,185,66,0.06), transparent 60%),
+        linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
+    }
+
+    .hero-deco { position: absolute; border-radius: 50%; pointer-events: none; }
+    .hero-deco-1 {
+      top: 8%; right: 8%;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(79,179,168,0.18), transparent 68%);
+      animation: float 9s ease-in-out infinite;
+    }
+    .hero-deco-2 {
+      bottom: 10%; left: 4%;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(30,90,168,0.14), transparent 68%);
+      animation: float 11s ease-in-out infinite reverse;
+    }
+    .hero-deco-3 {
+      top: 40%; left: 42%;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(244,185,66,0.14), transparent 68%);
+      animation: float 13s ease-in-out infinite;
+    }
+
+    .hero-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .hero-line {
+      position: absolute;
+      height: 1px;
+      animation: lineSlide 8s ease-in-out infinite;
+    }
+    .hero-line:nth-child(1) { top: 22%; left: -20%; width: 40%; background: linear-gradient(90deg, transparent, rgba(79,179,168,0.35), transparent); animation-delay: 0s; }
+    .hero-line:nth-child(2) { top: 55%; left: -20%; width: 30%; background: linear-gradient(90deg, transparent, rgba(30,90,168,0.35), transparent); animation-delay: 2s; }
+    .hero-line:nth-child(3) { top: 78%; left: -20%; width: 50%; background: linear-gradient(90deg, transparent, rgba(244,185,66,0.35), transparent); animation-delay: 4s; }
+
+    @keyframes lineSlide {
+      0% { transform: translateX(0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(200%); opacity: 0; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-content { animation: slideLeft 1s var(--ease-lux) both; }
+
+    .hero-float-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px 8px 8px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 100px;
+      border: 1px solid rgba(30,90,168,0.15);
+      box-shadow: 0 10px 24px -8px rgba(15,27,45,0.1);
+      margin-bottom: 22px;
+      animation: float 5s ease-in-out infinite;
+    }
+    .hero-float-badge .badge-dot {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px -2px rgba(30,90,168,0.5);
+    }
+    .hero-float-badge span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+    }
+    .hero-float-badge strong { color: var(--blue); }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: clamp(2.6rem, 6vw, 4.9rem);
+      line-height: 1.02;
+      letter-spacing: -0.032em;
+      margin: 0 0 24px;
+    }
+    .hero-title .line { display: block; overflow: hidden; }
+    .hero-title .line > span { display: inline-block; animation: titleReveal 0.9s var(--ease-lux) both; }
+    .hero-title .line:nth-child(1) > span { animation-delay: 0.1s; }
+    .hero-title .line:nth-child(2) > span { animation-delay: 0.25s; }
+    .hero-title .line:nth-child(3) > span { animation-delay: 0.4s; }
+
+    @keyframes titleReveal {
+      from { opacity: 0; transform: translateY(110%); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title em {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--red);
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title em::after {
+      content: '';
+      position: absolute;
+      bottom: 6px; left: 0; right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--gold), rgba(244,185,66,0.2));
+      border-radius: 4px;
+      opacity: 0.4;
+      z-index: -1;
+      transform-origin: left;
+      animation: underlineGrow 1.2s var(--ease-lux) 0.8s both;
+    }
+    @keyframes underlineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    .hero-desc {
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      opacity: 0.8;
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      transition: var(--ease-lux) 0.4s;
+      cursor: pointer;
+      white-space: nowrap;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: var(--white);
+      box-shadow: 0 14px 30px -10px rgba(196,30,46,0.5);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.7s var(--ease-lux);
+    }
+    .btn-primary:hover::before { left: 100%; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -10px rgba(196,30,46,0.6); }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.6);
+      color: var(--ink);
+      border: 1.5px solid rgba(15,27,45,0.12);
+      backdrop-filter: blur(10px);
+    }
+    .btn-outline:hover {
+      border-color: var(--blue);
+      background: var(--white);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-trust {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+      padding-top: 26px;
+      border-top: 1px solid rgba(15,27,45,0.06);
+    }
+    .trust-item { display: flex; align-items: center; gap: 11px; }
+    .trust-icon {
+      width: 42px; height: 42px;
+      border-radius: 13px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 1rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(30,90,168,0.15);
+      transition: var(--ease-lux) 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .trust-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .trust-icon i { position: relative; z-index: 1; transition: color 0.4s; }
+    .trust-item:hover .trust-icon {
+      transform: translateY(-4px) rotate(-6deg);
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
+    .trust-item:hover .trust-icon::before { opacity: 1; }
+    .trust-item:hover .trust-icon i { color: var(--white); }
+
+    .trust-text strong { display: block; font-size: 0.87rem; font-weight: 700; color: var(--ink); }
+    .trust-text span { font-size: 0.71rem; color: var(--ink-soft); opacity: 0.7; }
+
+    .hero-visual {
+      position: relative;
+      animation: slideRight 1s var(--ease-lux) both;
+      height: 600px;
+    }
+
+    .hero-img-main {
+      position: absolute;
+      top: 0; right: 0;
+      width: 76%; height: 76%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 10px solid var(--white);
+      z-index: 2;
+      transition: var(--ease-lux) 0.7s;
+      background: var(--cream-warm);
+    }
+    .hero-img-main:hover { transform: scale(1.02) rotate(-1.5deg); }
+    .hero-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease-lux); }
+    .hero-img-main:hover img { transform: scale(1.08); }
+
+    .hero-img-secondary {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 52%; height: 52%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 10px solid var(--white);
+      z-index: 3;
+      transition: var(--ease-lux) 0.7s;
+      background: var(--cream-warm);
+    }
+    .hero-img-secondary:hover { transform: scale(1.03) rotate(2deg); }
+    .hero-img-secondary img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease-lux); }
+    .hero-img-secondary:hover img { transform: scale(1.08); }
+
+    .hero-img-tertiary {
+      position: absolute;
+      top: 12%; left: -2%;
+      width: 26%; height: 26%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 8px solid var(--white);
+      z-index: 4;
+      transition: var(--ease-lux) 0.7s;
+      background: var(--cream-warm);
+      animation: float 7s ease-in-out infinite;
+    }
+    .hero-img-tertiary:hover { transform: scale(1.05) rotate(-3deg); }
+    .hero-img-tertiary img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease-lux); }
+    .hero-img-tertiary:hover img { transform: scale(1.1); }
+
+    .hero-float-card {
+      position: absolute;
+      top: 42%; left: 38%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 5;
+      border: 1px solid rgba(244,185,66,0.3);
+      animation: float 5s ease-in-out infinite;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .hero-float-card:hover { transform: translateY(-4px) scale(1.03); }
+    .hero-float-card .stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 1px; }
+    .hero-float-card .float-text strong { display: block; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
+    .hero-float-card .float-text span { font-size: 0.67rem; color: var(--ink-soft); opacity: 0.7; }
+
+    .hero-badge-ring {
+      position: absolute;
+      top: -14px; left: -14px;
+      width: 104px; height: 104px;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 6;
+      border: 1px solid rgba(30,90,168,0.18);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    .hero-badge-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed rgba(30,90,168,0.25);
+      animation: spinSlow 25s linear infinite;
+    }
+    .hero-badge-ring-inner { text-align: center; font-family: var(--font-serif); line-height: 1.1; }
+    .hero-badge-ring-inner .num { font-size: 1.5rem; font-weight: 700; color: var(--red); display: block; }
+    .hero-badge-ring-inner .lbl { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); opacity: 0.7; }
+
+    .hero-signature {
+      position: absolute;
+      bottom: 6%; right: -10px;
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: var(--cream);
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(244,185,66,0.3);
+      animation: float 6s ease-in-out infinite 1s;
+    }
+    .hero-signature i { color: var(--gold); font-size: 1.3rem; }
+    .hero-signature div strong { display: block; font-size: 0.76rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.02em; }
+    .hero-signature div span { font-size: 0.66rem; opacity: 0.75; }
+
+    /* ============================================================
+       BRAND BAR — LOGO STRIP
+       ============================================================ */
+    .brand-bar {
+      padding: 40px 0;
+      background: var(--white);
+      border-bottom: 1px solid rgba(15,27,45,0.05);
+    }
+    .brand-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .brand-logo {
+      flex: 1;
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0.8;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .brand-logo:hover { opacity: 1; transform: translateY(-3px); }
+    .brand-logo img { max-height: 60px; width: auto; object-fit: contain; }
+
+    /* ============================================================
+       CATEGORIES
+       ============================================================ */
+    .categories-strip {
+      padding: 90px 0;
+      background: linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
+      position: relative;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    .section-head-left { max-width: 640px; }
+    .section-head-left .display-title { margin-top: 14px; }
+    .section-head-left .section-sub { margin-top: 16px; }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .cat-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 300px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: var(--ease-lux) 0.5s;
+      border: 1px solid rgba(15,27,45,0.04);
+      background: var(--cream-warm);
+    }
+    .cat-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+    .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-lux); }
+    .cat-card:hover img { transform: scale(1.1); }
+
+    .cat-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 25%, rgba(15,27,45,0.9) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: var(--white);
+      transition: var(--ease-lux) 0.5s;
+    }
+    .cat-card:hover .cat-overlay { background: linear-gradient(180deg, rgba(30,90,168,0.25) 0%, rgba(15,27,45,0.95) 100%); }
+
+    .cat-icon {
+      width: 44px; height: 44px;
+      border-radius: 13px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      transition: var(--ease-lux) 0.5s;
+    }
+    .cat-card:hover .cat-icon { background: var(--gold); color: var(--ink); transform: scale(1.1) rotate(-6deg); }
+
+    .cat-card h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .cat-card p { font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px; }
+    .cat-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: var(--ease-lux) 0.4s;
+    }
+    .cat-card:hover .cat-link { gap: 14px; }
+
+    /* ============================================================
+       FEATURED PRODUCTS
+       ============================================================ */
+    .featured-section { padding: 100px 0; background: var(--cream); position: relative; }
+
+    .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+    .chip {
+      padding: 9px 18px;
+      border-radius: 100px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      background: var(--white);
+      border: 1px solid rgba(15,27,45,0.08);
+      cursor: pointer;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .chip:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .chip.active {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 10px 24px -8px rgba(30,90,168,0.4);
+    }
+
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px; }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--ease-lux) 0.5s;
+      border: 1px solid rgba(15,27,45,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      opacity: 0;
+      animation: scaleIn 0.7s var(--ease-lux) forwards;
+    }
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(30,90,168,0.25);
+    }
+
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+      background: var(--cream-warm);
+    }
+    .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-lux); }
+    .product-card:hover .product-image img { transform: scale(1.08); }
+
+    .product-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(196,30,46,0.15);
+      z-index: 2;
+    }
+    .product-badge.blue { color: var(--blue); border-color: rgba(30,90,168,0.2); }
+    .product-badge.gold { color: var(--gold-dark); border-color: rgba(244,185,66,0.3); }
+    .product-badge.green { color: var(--green); border-color: rgba(30,138,60,0.2); }
+    .product-badge.teal { color: var(--teal-dark); border-color: rgba(79,179,168,0.25); }
+
+    .product-code {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: rgba(15,27,45,0.85);
+      color: var(--cream);
+      padding: 5px 10px;
+      border-radius: 100px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+
+    .product-info { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+
+    .product-region {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .product-region i { font-size: 0.66rem; color: var(--gold-dark); }
+
+    .product-info h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .product-info p {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      opacity: 0.75;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(15,27,45,0.05);
+    }
+    .product-meta-left { display: flex; align-items: center; gap: 12px; font-size: 0.7rem; color: var(--ink-soft); opacity: 0.75; }
+    .product-meta-left i { color: var(--gold-dark); }
+
+    .product-arrow {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--cream-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      font-size: 0.7rem;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .product-card:hover .product-arrow {
+      background: var(--blue);
+      color: var(--white);
+      transform: rotate(-45deg);
+      box-shadow: 0 8px 18px -6px rgba(30,90,168,0.5);
+    }
+
+    /* ============================================================
+       CATEGORY SHOWCASE — RICH SECTIONS
+       ============================================================ */
+    .showcase-section {
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .showcase-section.alt { background: var(--cream-warm); }
+    .showcase-section.dark {
+      background: linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
+      color: var(--cream);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .showcase-grid.reverse { grid-template-columns: 1.05fr 1fr; }
+    .showcase-grid.reverse .showcase-visual { order: 2; }
+    .showcase-grid.reverse .showcase-content { order: 1; }
+
+    .showcase-visual { position: relative; height: 540px; }
+
+    .showcase-img-1 {
+      position: absolute;
+      top: 0; left: 0;
+      width: 70%; height: 70%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 8px solid var(--white);
+      z-index: 2;
+      background: var(--cream-warm);
+    }
+    .showcase-img-2 {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 60%; height: 60%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 8px solid var(--white);
+      z-index: 3;
+      background: var(--cream-warm);
+    }
+    .showcase-img-1 img, .showcase-img-2 img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s var(--ease-lux);
+    }
+    .showcase-img-1:hover img, .showcase-img-2:hover img { transform: scale(1.08); }
+
+    .showcase-badge {
+      position: absolute;
+      bottom: 8%; left: 6%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: var(--white);
+      padding: 20px 26px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 24px 48px -12px rgba(30,90,168,0.6);
+      z-index: 4;
+      animation: float 6s ease-in-out infinite;
+      text-align: center;
+    }
+    .showcase-badge .num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+      color: var(--gold-light);
+    }
+    .showcase-badge .lbl {
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.95;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .showcase-content .display-title { margin: 14px 0 22px; }
+    .showcase-content p {
+      font-size: 0.98rem;
+      color: var(--ink-soft);
+      opacity: 0.8;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .showcase-section.dark .showcase-content p { color: var(--cream); opacity: 0.75; }
+    .showcase-section.dark .showcase-content .display-title { color: var(--cream); }
+    .showcase-section.dark .showcase-content .display-title em { color: var(--gold); }
+    .showcase-section.dark .eyebrow { color: var(--gold); }
+    .showcase-section.dark .eyebrow::before { background: var(--gold); }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-xs);
+      border: 1px solid rgba(15,27,45,0.05);
+      transition: var(--ease-lux) 0.4s;
+    }
+    .showcase-section.dark .feature-item {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .feature-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      border-color: rgba(30,90,168,0.2);
+    }
+    .feature-item i {
+      color: var(--blue);
+      font-size: 0.9rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .showcase-section.dark .feature-item i { color: var(--gold); }
+    .feature-item span { font-size: 0.8rem; font-weight: 500; line-height: 1.4; }
+
+    /* Product mini grid inside showcase */
+    .mini-products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .mini-product {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-xs);
+      border: 1px solid rgba(15,27,45,0.05);
+      transition: var(--ease-lux) 0.4s;
+      cursor: pointer;
+    }
+    .showcase-section.dark .mini-product {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .mini-product:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .mini-product-img {
+      height: 110px;
+      overflow: hidden;
+      background: var(--cream-warm);
+      position: relative;
+    }
+    .mini-product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease-lux); }
+    .mini-product:hover .mini-product-img img { transform: scale(1.08); }
+    .mini-product-body { padding: 10px 12px; }
+    .mini-product-body .code { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; color: var(--blue); text-transform: uppercase; }
+    .showcase-section.dark .mini-product-body .code { color: var(--gold); }
+    .mini-product-body h4 { font-size: 0.78rem; font-weight: 600; line-height: 1.3; margin-top: 3px; }
+    .mini-product-body .weight { font-size: 0.65rem; opacity: 0.65; margin-top: 2px; }
+
+    /* ============================================================
+       REGION / INFO BANNER
+       ============================================================ */
+    .info-banner {
+      padding: 60px 0;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .info-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,185,66,0.25), transparent 70%);
+      animation: float 10s ease-in-out infinite;
+    }
+    .info-banner-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .info-banner-inner h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .info-banner-inner p { font-size: 0.9rem; opacity: 0.9; }
+    .info-banner-inner .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--ease-lux) 0.4s;
+      box-shadow: 0 10px 24px -8px rgba(244,185,66,0.6);
+      flex-shrink: 0;
+    }
+    .info-banner-inner .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -8px rgba(244,185,66,0.8); }
+
+    /* ============================================================
+       CONTACT SECTION
+       ============================================================ */
+    .contact-section {
+      padding: 100px 0;
+      background: var(--cream);
+      position: relative;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-info .display-title { margin: 14px 0 22px; }
+    .contact-info > p { font-size: 0.98rem; color: var(--ink-soft); opacity: 0.8; line-height: 1.8; margin-bottom: 30px; }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-xs);
+      border: 1px solid rgba(15,27,45,0.05);
+      transition: var(--ease-lux) 0.4s;
+    }
+    .contact-item:hover { transform: translateX(6px); box-shadow: var(--shadow-sm); border-color: rgba(30,90,168,0.2); }
+    .contact-item-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .contact-item:hover .contact-item-icon { transform: rotate(-8deg) scale(1.05); }
+    .contact-item-body strong { display: block; font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; letter-spacing: 0.02em; }
+    .contact-item-body span { font-size: 0.82rem; color: var(--ink-soft); opacity: 0.8; line-height: 1.5; display: block; }
+    .contact-item-body a { color: var(--blue); font-weight: 500; transition: color 0.3s; }
+    .contact-item-body a:hover { color: var(--red); }
+
+    .contact-map {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(15,27,45,0.05);
+      height: 100%;
+      min-height: 400px;
+      position: relative;
+    }
+    .contact-map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; display: block; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 70px 0 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--teal), var(--blue), var(--gold), var(--red), transparent);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1.5fr;
+      gap: 44px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand .logo { margin-bottom: 18px; }
+    .footer-brand .logo-text .brand { color: var(--cream); }
+    .footer-brand p { font-size: 0.85rem; opacity: 0.65; line-height: 1.7; max-width: 340px; margin-bottom: 22px; }
+
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-socials a {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      font-size: 0.85rem;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .footer-socials a:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      transform: translateY(-4px) rotate(-4deg);
+      box-shadow: 0 12px 24px -8px rgba(30,90,168,0.5);
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-col ul li { margin-bottom: 11px; }
+    .footer-col ul a {
+      font-size: 0.85rem;
+      opacity: 0.65;
+      transition: var(--ease-lux) 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-col ul a:hover { opacity: 1; color: var(--gold); transform: translateX(6px); }
+    .footer-col ul a i { font-size: 0.6rem; color: var(--teal); }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+    .footer-contact-item i { color: var(--gold); font-size: 0.95rem; margin-top: 3px; flex-shrink: 0; }
+    .footer-contact-item span { line-height: 1.55; }
+    .footer-contact-item a { color: var(--cream); transition: color 0.3s; }
+    .footer-contact-item a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.78rem;
+      opacity: 0.55;
+    }
+    .footer-bottom-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-bottom-links a { transition: opacity 0.3s; }
+    .footer-bottom-links a:hover { opacity: 1; color: var(--gold); }
+
+    /* ============================================================
+       SIDE MENU
+       ============================================================ */
+    .side-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      color: var(--cream);
+      z-index: 2000;
+      transform: translateX(100%);
+      transition: transform 0.7s var(--ease-lux);
+      overflow-y: auto;
+      padding: 36px 0;
+    }
+    .side-menu.open { transform: translateX(0); }
+    .side-menu::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,90,168,0.15), transparent 70%);
+      animation: float 10s ease-in-out infinite;
+    }
+    .side-menu-inner { max-width: 1200px; margin: 0 auto; padding: 0 36px; position: relative; z-index: 2; }
+    .side-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+
+    .side-menu-close {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--cream);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--ease-lux) 0.4s;
+    }
+    .side-menu-close:hover { background: var(--red); border-color: var(--red); transform: rotate(90deg); }
+
+    .side-menu-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; }
+    .side-menu-links h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 26px;
+      letter-spacing: -0.02em;
+    }
+    .side-menu-links h3 em { font-family: var(--font-display); font-style: italic; color: var(--gold); }
+    .side-menu-links ul li { margin-bottom: 4px; }
+    .side-menu-links ul a {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      color: var(--cream);
+      opacity: 0.72;
+      transition: var(--ease-lux) 0.4s;
+      letter-spacing: -0.01em;
+    }
+    .side-menu-links ul a:hover { opacity: 1; color: var(--gold); transform: translateX(20px); }
+    .side-menu-links ul a .num {
+      font-family: var(--font-sans);
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      min-width: 30px;
+    }
+
+    .side-menu-info { padding-top: 16px; }
+    .side-menu-info h4 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .side-menu-info .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+      opacity: 0.75;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .side-menu-info .info-item i { color: var(--gold); font-size: 0.95rem; margin-top: 4px; flex-shrink: 0; }
+    .side-menu-info .info-item a { color: var(--cream); transition: color 0.3s; }
+    .side-menu-info .info-item a:hover { color: var(--gold); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1200px) {
+      .hero-grid { gap: 50px; }
+      .showcase-grid, .showcase-grid.reverse { gap: 50px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .side-menu-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contact-grid { gap: 40px; }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+      .hero-visual { height: 520px; max-width: 620px; margin: 0 auto; width: 100%; }
+      .showcase-grid, .showcase-grid.reverse { grid-template-columns: 1fr; gap: 60px; }
+      .showcase-grid.reverse .showcase-visual,
+      .showcase-grid.reverse .showcase-content { order: initial; }
+      .showcase-visual { height: 480px; max-width: 600px; margin: 0 auto; width: 100%; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-map { min-height: 350px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .container-narrow { padding: 0 20px; }
+      .marquee-strip { margin-top: 76px; }
+      .hero { padding: 40px 0 70px; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-visual { height: 440px; }
+      .hero-badge-ring { width: 84px; height: 84px; top: -10px; left: -10px; }
+      .hero-badge-ring-inner .num { font-size: 1.3rem; }
+      .hero-float-card { display: none; }
+      .hero-signature { display: none; }
+      .hero-img-tertiary { display: none; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+      .showcase-visual { height: 420px; }
+      .showcase-badge { padding: 16px 20px; }
+      .showcase-badge .num { font-size: 1.6rem; }
+      .feature-list { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom-links { justify-content: center; }
+      .side-menu-links ul a { font-size: 1.5rem; }
+      .info-banner-inner { flex-direction: column; align-items: flex-start; text-align: left; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .container-narrow { padding: 0 16px; }
+      .marquee-strip { margin-top: 72px; }
+      .hero-title { font-size: 2rem; }
+      .hero-visual { height: 380px; }
+      .hero-trust { gap: 18px; }
+      .trust-item { gap: 8px; }
+      .trust-icon { width: 36px; height: 36px; font-size: 0.85rem; }
+      .trust-text strong { font-size: 0.8rem; }
+      .trust-text span { font-size: 0.66rem; }
+      .section-title { font-size: 1.7rem; }
+      .display-title { font-size: 2rem; }
+      .product-grid { grid-template-columns: 1fr; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .mini-products { grid-template-columns: 1fr 1fr; }
+      .side-menu-inner { padding: 0 20px; }
+      .side-menu-links h3 { font-size: 1.5rem; }
+      .side-menu-links ul a { font-size: 1.25rem; }
+      .btn { padding: 12px 22px; font-size: 0.78rem; }
+      .showcase-visual { height: 360px; }
+      .showcase-badge { display: none; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--cream-warm); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--blue), var(--teal));
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue-dark); }
+
+    ::selection { background: var(--gold); color: var(--ink); }
+  </style>
+</head>
+<body class="no-scroll">
+
+<!-- ============================================================
+     PRELOADER — BRANDED LOADING
+     ============================================================ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-bg" id="preloaderBg">
+    <div class="preloader-wave teal"></div>
+    <div class="preloader-wave blue"></div>
+    <div class="preloader-wave gold"></div>
+    <div class="preloader-wave red"></div>
+  </div>
+  <div class="preloader-inner">
+    <div class="preloader-logo">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='t' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234FB3A8'/><stop offset='1' stop-color='%232E8A80'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234A85CC'/><stop offset='1' stop-color='%231E5AA8'/></linearGradient><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FBD07A'/><stop offset='1' stop-color='%23D89A1F'/></linearGradient></defs><circle cx='100' cy='100' r='58' fill='url(%23b)'/><path d='M20 70 Q60 45 100 55 Q140 65 180 60' stroke='url(%23t)' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M20 130 Q60 155 100 145 Q140 135 180 140' stroke='url(%23g)' stroke-width='9' fill='none' stroke-linecap='round'/><text x='100' y='170' text-anchor='middle' font-family='Georgia,serif' font-weight='bold' font-size='26' fill='%231A3A6B'>Noi, la qualità</text></svg>" alt="Noi, la qualità">
+    </div>
+    <div class="preloader-brand">
+      <span class="golosa">Golosa</span><span class="quality">qualità</span>
+      <small>High Quality Food · Il Nostro Brand</small>
+    </div>
+    <div class="preloader-progress"><div class="preloader-bar"></div></div>
+    <div class="preloader-tagline">Dal 1911 · L'eccellenza italiana in ogni prodotto</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<div class="header-wrapper" id="headerWrapper">
+  <div class="header-pill">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <div class="logo-img">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='t' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234FB3A8'/><stop offset='1' stop-color='%232E8A80'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234A85CC'/><stop offset='1' stop-color='%231E5AA8'/></linearGradient><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FBD07A'/><stop offset='1' stop-color='%23D89A1F'/></linearGradient></defs><circle cx='100' cy='100' r='58' fill='url(%23b)'/><path d='M20 70 Q60 45 100 55 Q140 65 180 60' stroke='url(%23t)' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M20 130 Q60 155 100 145 Q140 135 180 140' stroke='url(%23g)' stroke-width='9' fill='none' stroke-linecap='round'/><text x='100' y='170' text-anchor='middle' font-family='Georgia,serif' font-weight='bold' font-size='24' fill='%231A3A6B'>Noi, la qualità</text></svg>" alt="Noi, la qualità">
+        </div>
+        <div class="logo-text">
+          <span class="brand"><span class="golosa">Golosa</span><span class="quality">qualità</span></span>
+          <small>High Quality Food</small>
+        </div>
+      </a>
+
+      <nav class="nav-main">
+        <a href="#catalogo" class="nav-link" data-i18n="nav.catalog">Catalogo</a>
+        <a href="#pasta" class="nav-link" data-i18n="nav.pasta">Pasta</a>
+        <a href="#formaggi" class="nav-link" data-i18n="nav.cheese">Formaggi</a>
+        <a href="#salumi" class="nav-link" data-i18n="nav.cured">Salumi</a>
+        <a href="#contatti" class="nav-link" data-i18n="nav.contact">Contatti</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="mobile-contact">
+          <a href="tel:+390666995093"><i class="fas fa-phone"></i> +39 06 66995093</a>
+        </div>
+
+        <div class="lang-toggle" onclick="toggleLang()" id="langToggle" role="button" aria-label="Cambia lingua">
+          <div class="lang-slider"></div>
+          <span class="active" data-lang="it">IT</span>
+          <span data-lang="en">EN</span>
+        </div>
+
+        <a href="#catalogo" class="btn-explore">
+          <span data-i18n="nav.explore">Esplora</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+
+        <button class="menu-btn" onclick="openSideMenu()" aria-label="Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SIDE MENU
+     ============================================================ -->
+<div class="side-menu" id="sideMenu">
+  <div class="side-menu-inner">
+    <div class="side-menu-header">
+      <div class="logo">
+        <div class="logo-img" style="background:rgba(255,255,255,0.1);">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='t2' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234FB3A8'/><stop offset='1' stop-color='%232E8A80'/></linearGradient><linearGradient id='b2' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234A85CC'/><stop offset='1' stop-color='%231E5AA8'/></linearGradient><linearGradient id='g2' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FBD07A'/><stop offset='1' stop-color='%23D89A1F'/></linearGradient></defs><circle cx='100' cy='100' r='58' fill='url(%23b2)'/><path d='M20 70 Q60 45 100 55 Q140 65 180 60' stroke='url(%23t2)' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M20 130 Q60 155 100 145 Q140 135 180 140' stroke='url(%23g2)' stroke-width='9' fill='none' stroke-linecap='round'/></svg>" alt="Noi, la qualità">
+        </div>
+        <div class="logo-text">
+          <span class="brand" style="color:var(--cream);"><span style="color:var(--gold);">Golosa</span><span style="color:var(--teal-light);">qualità</span></span>
+          <small style="color:var(--gold);">High Quality Food</small>
+        </div>
+      </div>
+      <button class="side-menu-close" onclick="closeSideMenu()" aria-label="Chiudi menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="side-menu-grid">
+      <div class="side-menu-links">
+        <h3 data-i18n="menu.title">Esplora il <em>catalogo</em></h3>
+        <ul>
+          <li><a href="#catalogo" onclick="closeSideMenu()"><span class="num">01</span> <span data-i18n="menu.catalog">Catalogo Completo</span></a></li>
+          <li><a href="#pasta" onclick="closeSideMenu()"><span class="num">02</span> <span data-i18n="menu.pasta">Pasta & Riso</span></a></li>
+          <li><a href="#salumi" onclick="closeSideMenu()"><span class="num">03</span> <span data-i18n="menu.cured">Salumi</span></a></li>
+          <li><a href="#formaggi" onclick="closeSideMenu()"><span class="num">04</span> <span data-i18n="menu.cheese">Formaggi</span></a></li>
+          <li><a href="#miele" onclick="closeSideMenu()"><span class="num">05</span> <span data-i18n="menu.honey">Miele & Sottoli</span></a></li>
+          <li><a href="#tartufi" onclick="closeSideMenu()"><span class="num">06</span> <span data-i18n="menu.truffles">Tartufi</span></a></li>
+          <li><a href="#alcolici" onclick="closeSideMenu()"><span class="num">07</span> <span data-i18n="menu.spirits">Alcolici</span></a></li>
+          <li><a href="#contatti" onclick="closeSideMenu()"><span class="num">08</span> <span data-i18n="menu.contact">Contatti</span></a></li>
+        </ul>
+      </div>
+
+      <div class="side-menu-info">
+        <h4 data-i18n="menu.directContact">Contatti Diretti</h4>
+        <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <span>+39 06 66995093<br>+39 379 141 3514<br><small style="opacity:0.5;">Lun–Ven · 9:00–18:00 CET</small></span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <span><a href="mailto:info@noilaqualita.it">info@noilaqualita.it</a><br><a href="mailto:info@golosaaqualita.it">info@golosaaqualita.it</a></span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-location-dot"></i>
+          <span>Viale C. Sabatini, 161<br>00144 Roma (RM), Italia</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-truck"></i>
+          <span data-i18n="menu.shipping">Consegne gratuite su Roma entro il GRA</span>
+        </div>
+
+        <h4 style="margin-top: 36px;" data-i18n="menu.follow">Seguici</h4>
+        <div class="footer-socials" style="margin-top: 0;">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div class="marquee-strip" id="top">
+  <div class="marquee-track">
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.1">Pasta Artigianale</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.2">Riso Carnaroli</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.3">Salumi di Parma</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.4">Caciocavallo Affinato</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.5">Miele Biologico</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.6">Tartufo Estivo</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.7">Doppio Senso</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.8">Grappa Toscana</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.1">Pasta Artigianale</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.2">Riso Carnaroli</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.3">Salumi di Parma</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.4">Caciocavallo Affinato</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.5">Miele Biologico</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.6">Tartufo Estivo</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.7">Doppio Senso</span></div>
+    <div class="marquee-item"><i class="fas fa-star"></i> <span data-i18n="marquee.8">Grappa Toscana</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="hero-lines">
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+  </div>
+
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="hero-float-badge">
+        <div class="badge-dot"><i class="fas fa-award"></i></div>
+        <span><strong data-i18n="hero.badgeStrong">Eccellenza Italiana</strong> <span data-i18n="hero.badgeRest">· Dal 1911</span></span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line"><span data-i18n="hero.t1">Il gusto autentico</span></span>
+        <span class="line"><span data-i18n="hero.t2">dell'</span><em data-i18n="hero.t3">Italia artigianale</em>.</span>
+      </h1>
+
+      <p class="hero-desc" data-i18n="hero.desc">
+        Selezione premium di prodotti italiani: pasta, riso, salumi, formaggi, miele, sottoli, tartufi e alcolici. Ogni prodotto racconta una storia di tradizione, territorio e passione.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#catalogo" class="btn btn-primary">
+          <span data-i18n="hero.cta1">Scopri il Catalogo</span> <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#contatti" class="btn btn-outline">
+          <i class="fas fa-phone" style="font-size: 0.75rem;"></i> <span data-i18n="hero.cta2">Contattaci</span>
+        </a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-award"></i></div>
+          <div class="trust-text">
+            <strong data-i18n="hero.tr1a">100% Italiano</strong>
+            <span data-i18n="hero.tr1b">Filiera certificata</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-truck-fast"></i></div>
+          <div class="trust-text">
+            <strong data-i18n="hero.tr2a">Spedizioni</strong>
+            <span data-i18n="hero.tr2b">Italia ed estero</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="trust-text">
+            <strong data-i18n="hero.tr3a">DOP / IGP</strong>
+            <span data-i18n="hero.tr3b">Certificazioni europee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-badge-ring">
+        <div class="hero-badge-ring-inner">
+          <span class="num">1911</span>
+          <span class="lbl" data-i18n="hero.since">Dal</span>
+        </div>
+      </div>
+
+      <div class="hero-img-main">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1200&auto=format&fit=crop" alt="Pasta artigianale italiana" loading="eager">
+      </div>
+
+      <div class="hero-img-tertiary">
+        <img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=600&auto=format&fit=crop" alt="Pomodori San Marzano" loading="eager">
+      </div>
+
+      <div class="hero-img-secondary">
+        <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=1000&auto=format&fit=crop" alt="Salumi italiani" loading="eager">
+      </div>
+
+      <div class="hero-float-card">
+        <div class="stars">★★★★★</div>
+        <div class="float-text">
+          <strong>4.9 / 5.0</strong>
+          <span data-i18n="hero.reviews">2.400+ clienti</span>
+        </div>
+      </div>
+
+      <div class="hero-signature">
+        <i class="fas fa-certificate"></i>
+        <div>
+          <strong data-i18n="hero.certTitle">Made in Italy</strong>
+          <span data-i18n="hero.certSub">Qualità garantita</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BRAND BAR
+     ============================================================ -->
+<section class="brand-bar">
+  <div class="container brand-bar-inner">
+    <div class="brand-logo">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'><defs><linearGradient id='t3' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234FB3A8'/><stop offset='1' stop-color='%232E8A80'/></linearGradient><linearGradient id='b3' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234A85CC'/><stop offset='1' stop-color='%231E5AA8'/></linearGradient><linearGradient id='g3' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FBD07A'/><stop offset='1' stop-color='%23D89A1F'/></linearGradient></defs><circle cx='60' cy='55' r='35' fill='url(%23b3)'/><path d='M10 35 Q40 20 60 30 Q80 40 110 35' stroke='url(%23t3)' stroke-width='6' fill='none' stroke-linecap='round'/><path d='M10 85 Q40 100 60 90 Q80 80 110 85' stroke='url(%23g3)' stroke-width='6' fill='none' stroke-linecap='round'/><text x='145' y='50' font-family='Georgia,serif' font-style='italic' font-weight='bold' font-size='32' fill='%231A3A6B'>Noi,</text><text x='145' y='90' font-family='Georgia,serif' font-weight='bold' font-size='32' fill='%231A3A6B'>la qualità</text><text x='150' y='108' font-family='Arial,sans-serif' font-size='10' fill='%234FB3A8' letter-spacing='2'>SRL</text></svg>" alt="Noi, la qualità srl">
+    </div>
+    <div class="brand-logo">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'><path d='M60 20 Q80 10 100 20 L110 15 Q120 25 110 35 L100 30 Q80 40 60 30 Z' fill='%23C41E2E'/><text x='120' y='60' font-family='Georgia,serif' font-style='italic' font-weight='bold' font-size='42' fill='%23C41E2E'>Golosaqualità</text><text x='120' y='85' font-family='Arial,sans-serif' font-weight='bold' font-size='14' fill='%231E8A3C' letter-spacing='1'>HIGH QUALITY FOOD</text><text x='120' y='102' font-family='Arial,sans-serif' font-size='11' fill='%23C41E2E' letter-spacing='2'>IL NOSTRO BRAND</text></svg>" alt="Golosaqualità">
+    </div>
+    <div class="brand-logo" style="justify-content:flex-end;">
+      <div style="text-align:right;">
+        <div style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--ink);" data-i18n="brand.tagline">Qualità italiana dal 1911</div>
+        <div style="font-size:0.75rem;color:var(--ink-soft);opacity:0.7;" data-i18n="brand.sub">Distribuzione e selezione</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CATEGORIES
+     ============================================================ -->
+<section class="categories-strip" id="categorie">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-head-left">
+        <span class="eyebrow" data-i18n="cat.eyebrow">Esplora per categoria</span>
+        <h2 class="section-title" data-i18n="cat.title">Le nostre categorie</h2>
+        <p class="section-sub" data-i18n="cat.sub">Dalle varietà di pasta ai formaggi affinati, ogni categoria racchiude l'eccellenza della tradizione italiana.</p>
+      </div>
+    </div>
+
+    <div class="cat-grid">
+      <a href="#pasta" class="cat-card reveal">
+        <img src="https://images.unsplash.com/photo-1556761223-4c4282c73f77?q=80&w=800&auto=format&fit=crop" alt="Pasta" loading="lazy">
+        <div class="cat-overlay">
+          <div class="cat-icon"><i class="fas fa-wheat-awn"></i></div>
+          <h3 data-i18n="cat.pasta">Pasta & Riso</h3>
+          <p data-i18n="cat.pastaSub">Pasta di semola, grano duro e riso</p>
+          <span class="cat-link"><span data-i18n="cat.discover">Scopri</span> <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="#salumi" class="cat-card reveal">
+        <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=800&auto=format&fit=crop" alt="Salumi" loading="lazy">
+        <div class="cat-overlay">
+          <div class="cat-icon"><i class="fas fa-drumstick-bite"></i></div>
+          <h3 data-i18n="cat.cured">Salumi</h3>
+          <p data-i18n="cat.curedSub">Prosciutti, salami e mortadelle</p>
+          <span class="cat-link"><span data-i18n="cat.discover">Scopri</span> <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="#formaggi" class="cat-card reveal">
+        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=800&auto=format&fit=crop" alt="Formaggi" loading="lazy">
+        <div class="cat-overlay">
+          <div class="cat-icon"><i class="fas fa-cheese"></i></div>
+          <h3 data-i18n="cat.cheese">Formaggi</h3>
+          <p data-i18n="cat.cheeseSub">Caciocavallo, pecorino, caciotte</p>
+          <span class="cat-link"><span data-i18n="cat.discover">Scopri</span> <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="#miele" class="cat-card reveal">
+        <img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=800&auto=format&fit=crop" alt="Miele" loading="lazy">
+        <div class="cat-overlay">
+          <div class="cat-icon"><i class="fas fa-jar"></i></div>
+          <h3 data-i18n="cat.honey">Miele & Sottoli</h3>
+          <p data-i18n="cat.honeySub">Miele, carciofi, funghi, melanzane</p>
+          <span class="cat-link"><span data-i18n="cat.discover">Scopri</span> <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="#tartufi" class="cat-card reveal">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Tartufi" loading="lazy">
+        <div class="cat-overlay">
+          <div class="cat-icon"><i class="fas fa-mortar-pestle"></i></div>
+          <h3 data-i18n="cat.truffles">Tartufi</h3>
+          <p data-i18n="cat.trufflesSub">Creme e condimenti al tartufo</p>
+          <span class="cat-link"><span data-i18n="cat.discover">Scopri</span> <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="#alcolici" class="cat-card reveal">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop" alt="Alcolici" loading="lazy">
+        <div class="cat-overlay">
+          <div class="cat-icon"><i class="fas fa-wine-bottle"></i></div>
+          <h3 data-i18n="cat.spirits">Alcolici</h3>
+          <p data-i18n="cat.spiritsSub">Grappe, liquori, Doppio Senso</p>
+          <span class="cat-link"><span data-i18n="cat.discover">Scopri</span> <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURED PRODUCTS
+     ============================================================ -->
+<section class="featured-section" id="catalogo">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-head-left">
+        <span class="eyebrow" data-i18n="prod.eyebrow">Selezione Premium</span>
+        <h2 class="display-title"><span data-i18n="prod.t1">I nostri</span> <em data-i18n="prod.t2">prodotti</em> <span data-i18n="prod.t3">in evidenza</span></h2>
+        <p class="section-sub" data-i18n="prod.sub">Ogni prodotto è selezionato a mano, con una storia di territorio e tradizione alle spalle.</p>
+
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all" data-i18n="prod.all">Tutti</button>
+          <button class="chip" data-filter="pasta" data-i18n="prod.pasta">Pasta</button>
+          <button class="chip" data-filter="riso" data-i18n="prod.rice">Riso</button>
+          <button class="chip" data-filter="salumi" data-i18n="prod.cured">Salumi</button>
+          <button class="chip" data-filter="formaggi" data-i18n="prod.cheese">Formaggi</button>
+          <button class="chip" data-filter="miele" data-i18n="prod.honey">Miele</button>
+          <button class="chip" data-filter="sottoli" data-i18n="prod.preserves">Sottoli</button>
+          <button class="chip" data-filter="tartufi" data-i18n="prod.truffles">Tartufi</button>
+          <button class="chip" data-filter="alcolici" data-i18n="prod.spirits">Alcolici</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- PASTA 1 -->
+      <div class="product-card" data-category="pasta" style="animation-delay: 0.05s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1556761223-4c4282c73f77?q=80&w=800&auto=format&fit=crop" alt="Fettuccine" loading="lazy">
+          <span class="product-badge" data-i18n="p.fresh">Pasta</span>
+          <span class="product-code">NQE207</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Golosaqualità</span></div>
+          <h3>Fettuccine</h3>
+          <p data-i18n="p.fettuccine.desc">Pasta di semola di grano duro, trafilata al bronzo. Perfetta con ragù e sughi ricchi.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-box"></i> 20 pz</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASTA 2 -->
+      <div class="product-card" data-category="pasta" style="animation-delay: 0.1s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=800&auto=format&fit=crop" alt="Linguine" loading="lazy">
+          <span class="product-badge" data-i18n="p.fresh">Pasta</span>
+          <span class="product-code">NQE210</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Golosaqualità</span></div>
+          <h3>Linguine</h3>
+          <p data-i18n="p.linguine.desc">Pasta lunga di semola, ideale per piatti di mare e condimenti delicati.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-box"></i> 20 pz</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASTA 3 -->
+      <div class="product-card" data-category="pasta" style="animation-delay: 0.15s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=800&auto=format&fit=crop" alt="Paccheri" loading="lazy">
+          <span class="product-badge" data-i18n="p.fresh">Pasta</span>
+          <span class="product-code">NQE213</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Golosaqualità</span></div>
+          <h3>Paccheri</h3>
+          <p data-i18n="p.paccheri.desc">Formato tipico campano, perfetto per essere farcito o servito con sughi densi.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-box"></i> 20 pz</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASTA 4 -->
+      <div class="product-card" data-category="pasta" style="animation-delay: 0.2s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=800&auto=format&fit=crop" alt="Rigatoni" loading="lazy">
+          <span class="product-badge" data-i18n="p.fresh">Pasta</span>
+          <span class="product-code">NQE208</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Golosaqualità</span></div>
+          <h3>Rigatoni</h3>
+          <p data-i18n="p.rigatoni.desc">Pasta corta rigata, trattiene perfettamente ogni tipo di sugo.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-box"></i> 20 pz</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASTA 5 - INTEGRALE -->
+      <div class="product-card" data-category="pasta" style="animation-delay: 0.25s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1556761223-4c4282c73f77?q=80&w=800&auto=format&fit=crop" alt="Pici integrale" loading="lazy">
+          <span class="product-badge green" data-i18n="p.integral">Integrale</span>
+          <span class="product-code">NQMVD2101</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Toscana</span></div>
+          <h3>Pici Semola Integrale</h3>
+          <p data-i18n="p.pici.desc">Pasta integrale di semola, ricca di fibre. Ideale per una cucina sana e gustosa.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-leaf"></i> Bio</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISO 1 -->
+      <div class="product-card" data-category="riso" style="animation-delay: 0.3s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop" alt="Riso Carnaroli" loading="lazy">
+          <span class="product-badge blue" data-i18n="p.rice">Riso</span>
+          <span class="product-code">NQRA1105</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Aramino</span></div>
+          <h3>Riso Carnaroli</h3>
+          <p data-i18n="p.carnaroli.desc">Il re dei risi per risotti. Grani lunghi e consistenti, eccellente assorbimento.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-award"></i> Premium</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISO 2 -->
+      <div class="product-card" data-category="riso" style="animation-delay: 0.35s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop" alt="Riso Arborio" loading="lazy">
+          <span class="product-badge blue" data-i18n="p.rice">Riso</span>
+          <span class="product-code">NQRA1106</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Aramino</span></div>
+          <h3>Riso Arborio</h3>
+          <p data-i18n="p.arborio.desc">Riso classico per risotti cremosi, con chicco grande e perla centrale.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-award"></i> Premium</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISO 3 - INTEGRALE -->
+      <div class="product-card" data-category="riso" style="animation-delay: 0.4s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop" alt="Riso Nero" loading="lazy">
+          <span class="product-badge green" data-i18n="p.integral">Integrale</span>
+          <span class="product-code">NQRA1107</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Aramino</span></div>
+          <h3>Riso Nero Integrale</h3>
+          <p data-i18n="p.nero.desc">Riso nero integrale, ricco di antociani. Perfetto per insalate e piatti gourmet.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-leaf"></i> Bio</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALUMI 1 -->
+      <div class="product-card" data-category="salumi" style="animation-delay: 0.45s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=800&auto=format&fit=crop" alt="Salame Stroghino" loading="lazy">
+          <span class="product-badge" data-i18n="p.cured">Salumi</span>
+          <span class="product-code">NQS401</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Emilia-Romagna</span></div>
+          <h3>Salame Stroghino</h3>
+          <p data-i18n="p.stroghino.desc">Rifilature di Culatello con concia di vino, pepe ed aglio. Gusto fresco e dolce.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 0,2–0,3 kg</span>
+              <span><i class="fas fa-clock"></i> Stagionato</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALUMI 2 -->
+      <div class="product-card" data-category="salumi" style="animation-delay: 0.5s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=800&auto=format&fit=crop" alt="Prosciutto Parma" loading="lazy">
+          <span class="product-badge" data-i18n="p.cured">Salumi</span>
+          <span class="product-code">NQS407</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Parma</span></div>
+          <h3>Prosciutto Parma 24 Mesi</h3>
+          <p data-i18n="p.parma24.desc">Prosciutto di Parma DOP con osso, stagionato 24 mesi. Gusto delicato e dolce.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 7–8,5 kg</span>
+              <span><i class="fas fa-certificate"></i> DOP</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALUMI 3 -->
+      <div class="product-card" data-category="salumi" style="animation-delay: 0.55s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=800&auto=format&fit=crop" alt="Mortadella" loading="lazy">
+          <span class="product-badge" data-i18n="p.cured">Salumi</span>
+          <span class="product-code">NQS403</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Emilia-Romagna</span></div>
+          <h3>Mortadella con Pistacchi</h3>
+          <p data-i18n="p.mortadella.desc">Mortadella artigianale con pistacchi interi. Equilibrio perfetto tra dolcezza e sapidità.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 6 kg</span>
+              <span><i class="fas fa-star"></i> Artigianale</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALUMI 4 -->
+      <div class="product-card" data-category="salumi" style="animation-delay: 0.6s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=800&auto=format&fit=crop" alt="LonzarDo" loading="lazy">
+          <span class="product-badge" data-i18n="p.cured">Salumi</span>
+          <span class="product-code">NQS421</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Lonzardo</h3>
+          <p data-i18n="p.lonzardo.desc">Prodotto esclusivo: la sapidità della lonza incontra la dolcezza del lardo.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 1,5–3 kg</span>
+              <span><i class="fas fa-star"></i> Esclusivo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALUMI 5 -->
+      <div class="product-card" data-category="salumi" style="animation-delay: 0.65s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=800&auto=format&fit=crop" alt="Lardo" loading="lazy">
+          <span class="product-badge" data-i18n="p.cured">Salumi</span>
+          <span class="product-code">NQR100</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Lardo Nostrano</h3>
+          <p data-i18n="p.lardo.desc">Lardo aromatizzato e stagionato. Perfetto su pane caldo e bruschette.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 0,4–3 kg</span>
+              <span><i class="fas fa-leaf"></i> Senza glutine</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMAGGI 1 -->
+      <div class="product-card" data-category="formaggi" style="animation-delay: 0.7s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=800&auto=format&fit=crop" alt="Caciocavallo" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.cheese">Formaggi</span>
+          <span class="product-code">NQF903</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Caciocavallo in Grotta</h3>
+          <p data-i18n="p.caciogrotta.desc">Affinato in grotta 90-120 giorni. Struttura compatta, tipo grana.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 1,6 kg</span>
+              <span><i class="fas fa-clock"></i> 90–120 gg</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMAGGI 2 -->
+      <div class="product-card" data-category="formaggi" style="animation-delay: 0.75s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=800&auto=format&fit=crop" alt="Caciocavallo Tartufo" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.cheese">Formaggi</span>
+          <span class="product-code">NQF906</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Caciocavallo Altartufo</h3>
+          <p data-i18n="p.caciotartufo.desc">Con tartufo estivo (Tuber Aestivum) 3%. Aroma intenso e raffinato.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 1,3 kg</span>
+              <span><i class="fas fa-clock"></i> 60 gg</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMAGGI 3 -->
+      <div class="product-card" data-category="formaggi" style="animation-delay: 0.8s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=800&auto=format&fit=crop" alt="Caciocavallo Affumicato" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.cheese">Formaggi</span>
+          <span class="product-code">NQF908</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Caciocavallo Affumicato</h3>
+          <p data-i18n="p.cacioaffumicato.desc">Affumicato con fumi di legno di faggio. Intenso sapore affumicato.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 1,4 kg</span>
+              <span><i class="fas fa-clock"></i> 30 gg</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMAGGI 4 -->
+      <div class="product-card" data-category="formaggi" style="animation-delay: 0.85s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=800&auto=format&fit=crop" alt="Pecorino" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.cheese">Formaggi</span>
+          <span class="product-code">NQF917</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Sardegna</span></div>
+          <h3>Pecorino Bustianu</h3>
+          <p data-i18n="p.bustianu.desc">Pecorino sardo con crosta dorata. Sapore gradevole, leggermente piccante.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 3,5 kg</span>
+              <span><i class="fas fa-star"></i> Sardo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIELE 1 -->
+      <div class="product-card" data-category="miele" style="animation-delay: 0.9s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=800&auto=format&fit=crop" alt="Miele" loading="lazy">
+          <span class="product-badge teal" data-i18n="p.honey">Miele</span>
+          <span class="product-code">NQAF002</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Miele di Ailanto</h3>
+          <p data-i18n="p.ailanto.desc">Miele delicato e aromatico di Ailanto italiano. Perfetto per colazione.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-leaf"></i> Naturale</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIELE 2 -->
+      <div class="product-card" data-category="miele" style="animation-delay: 0.95s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=800&auto=format&fit=crop" alt="Miele Castagno" loading="lazy">
+          <span class="product-badge teal" data-i18n="p.honey">Miele</span>
+          <span class="product-code">NQAF004</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Miele di Castagno</h3>
+          <p data-i18n="p.castagno.desc">Miele di castagno dal gusto intenso e leggermente amaro. Ricco di minerali.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-leaf"></i> Naturale</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIELE 3 -->
+      <div class="product-card" data-category="miele" style="animation-delay: 1s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=800&auto=format&fit=crop" alt="Miele Sulla" loading="lazy">
+          <span class="product-badge green" data-i18n="p.organic">Bio</span>
+          <span class="product-code">NQAF010</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Miele Sulla Bio</h3>
+          <p data-i18n="p.sulla.desc">Miele biologico di sulla, dal sapore delicato e floreale. Certificato Bio.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 500g</span>
+              <span><i class="fas fa-certificate"></i> Bio</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOTTOLI 1 -->
+      <div class="product-card" data-category="sottoli" style="animation-delay: 1.05s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=800&auto=format&fit=crop" alt="Carciofi" loading="lazy">
+          <span class="product-badge" data-i18n="p.preserves">Sottoli</span>
+          <span class="product-code">NQC1404</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Carciofi Arrostiti all'Olio</h3>
+          <p data-i18n="p.carciofi.desc">Carciofi arrostiti e conservati in olio. Delicati e pronti da gustare.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 580g</span>
+              <span><i class="fas fa-jar"></i> Barattolo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOTTOLI 2 -->
+      <div class="product-card" data-category="sottoli" style="animation-delay: 1.1s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=800&auto=format&fit=crop" alt="Funghi" loading="lazy">
+          <span class="product-badge" data-i18n="p.preserves">Sottoli</span>
+          <span class="product-code">NQC1415</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Funghi di Muschio all'Olio</h3>
+          <p data-i18n="p.funghi.desc">Funghi di muschio selezionati, conservati in olio. Sapore autentico del bosco.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 580g</span>
+              <span><i class="fas fa-jar"></i> Barattolo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOTTOLI 3 -->
+      <div class="product-card" data-category="sottoli" style="animation-delay: 1.15s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=800&auto=format&fit=crop" alt="Melanzane" loading="lazy">
+          <span class="product-badge" data-i18n="p.preserves">Sottoli</span>
+          <span class="product-code">NQC1421</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Italia</span></div>
+          <h3>Melanzane a Fette all'Olio</h3>
+          <p data-i18n="p.melanzane.desc">Melanzane a fette conservate in olio. Perfette per antipasti e bruschette.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 580g</span>
+              <span><i class="fas fa-jar"></i> Barattolo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARTUFI 1 -->
+      <div class="product-card" data-category="tartufi" style="animation-delay: 1.2s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Crema Tartufo" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.truffles">Tartufi</span>
+          <span class="product-code">NQMT1301</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Martelli Fabiano</span></div>
+          <h3>Crema Altartufo</h3>
+          <p data-i18n="p.crema.desc">Condimento a base di formaggi e tartufi. Cremosa e dal profumo intenso.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 90g</span>
+              <span><i class="fas fa-mortar-pestle"></i> Tartufo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARTUFI 2 -->
+      <div class="product-card" data-category="tartufi" style="animation-delay: 1.25s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Burro Tartufo" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.truffles">Tartufi</span>
+          <span class="product-code">NQMT1313</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Martelli Fabiano</span></div>
+          <h3>Burro al Tartufo</h3>
+          <p data-i18n="p.burro.desc">Burro 95% con tartufo bianchetto e tartufo estivo. Perfetto per crostini e paste.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 90g</span>
+              <span><i class="fas fa-mortar-pestle"></i> Tartufo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARTUFI 3 -->
+      <div class="product-card" data-category="tartufi" style="animation-delay: 1.3s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Olio Tartufo" loading="lazy">
+          <span class="product-badge gold" data-i18n="p.truffles">Tartufi</span>
+          <span class="product-code">NQMT1317</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Martelli Fabiano</span></div>
+          <h3>Olio Aromatizzato al Tartufo</h3>
+          <p data-i18n="p.oliotartufo.desc">Olio 95% con tartufo bianchetto e tartufo estivo. Ideale per condire a crudo.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 250ml</span>
+              <span><i class="fas fa-mortar-pestle"></i> Tartufo</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALCOLICI 1 -->
+      <div class="product-card" data-category="alcolici" style="animation-delay: 1.35s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop" alt="Doppio Senso" loading="lazy">
+          <span class="product-badge" data-i18n="p.spirits">Alcolici</span>
+          <span class="product-code">GLQ004</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Morelli 1911</span></div>
+          <h3>Doppio Senso</h3>
+          <p data-i18n="p.doppiosenso.desc">Liquore a base di rum e caramello salato. 35% vol. Unico nel suo genere.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 0,7 L</span>
+              <span><i class="fas fa-percent"></i> 35% vol</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALCOLICI 2 -->
+      <div class="product-card" data-category="alcolici" style="animation-delay: 1.4s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop" alt="Grappa Toscana" loading="lazy">
+          <span class="product-badge" data-i18n="p.spirits">Alcolici</span>
+          <span class="product-code">NQM002</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Morelli 1911</span></div>
+          <h3>Grappa Toscana</h3>
+          <p data-i18n="p.grappa.desc">Grappa toscana tradizionale, distillata con metodo artigianale dal 1911.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 0,70 L</span>
+              <span><i class="fas fa-wine-bottle"></i> Grappa</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALCOLICI 3 -->
+      <div class="product-card" data-category="alcolici" style="animation-delay: 1.45s;">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop" alt="Limoncino" loading="lazy">
+          <span class="product-badge" data-i18n="p.spirits">Alcolici</span>
+          <span class="product-code">NQM072</span>
+        </div>
+        <div class="product-info">
+          <div class="product-region"><i class="fas fa-map-pin"></i> <span>Morelli 1911</span></div>
+          <h3>Limoncino</h3>
+          <p data-i18n="p.limoncino.desc">Liquore al limone dal gusto fresco e intenso. Perfetto come digestivo.</p>
+          <div class="product-meta">
+            <div class="product-meta-left">
+              <span><i class="fas fa-weight-hanging"></i> 0,50 L</span>
+              <span><i class="fas fa-lemon"></i> Liquore</span>
+            </div>
+            <div class="product-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE — PASTA & RISO
+     ============================================================ -->
+<section class="showcase-section alt" id="pasta">
+  <div class="container">
+    <div class="showcase-grid reveal">
+      <div class="showcase-visual">
+        <div class="showcase-img-1">
+          <img src="https://images.unsplash.com/photo-1556761223-4c4282c73f77?q=80&w=900&auto=format&fit=crop" alt="Pasta artigianale" loading="lazy">
+        </div>
+        <div class="showcase-img-2">
+          <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=900&auto=format&fit=crop" alt="Riso Carnaroli" loading="lazy">
+        </div>
+        <div class="showcase-badge">
+          <span class="num">25+</span>
+          <span class="lbl" data-i18n="show.pasta.badge">Formati</span>
+        </div>
+      </div>
+      <div class="showcase-content">
+        <span class="eyebrow blue" data-i18n="show.pasta.eyebrow">Varietà di Pasta & Riso</span>
+        <h2 class="display-title"><span data-i18n="show.pasta.t1">La tradizione</span> <em data-i18n="show.pasta.t2">in ogni formato</em></h2>
+        <p data-i18n="show.pasta.p1">Dalla pasta di semola di grano duro ai risi pregiati Aramino: Spaghettoni, Mezzi Paccheri, Lumaconi, Mezze Maniche, Penne Lisce, Rigatoni, Tubettoni, Fusilloni, Fettuccine, Linguine, Paccheri, Pasta Mista, Mafalde, Taccole, Ziti Tagliati, Tubettini.</p>
+        <p data-i18n="show.pasta.p2">Anche nelle versioni integrali: Pici, Pappardelle, Tagliatelle, Tagliolini, Spaghettoni, Linguine, Pacchetti, Mezzi Pacchetti, Penne, Fusilloni Rigati, Rigatoni, Casarecce, Tubetti Rigati, Tempestine, Conchiglie Rigate, Fusilli Farro Monococco, Pennette Farro Monococco, Tagliatelle Farro Monococco.</p>
+        <div class="feature-list">
+          <div class="feature-item"><i class="fas fa-wheat-awn"></i> <span data-i18n="show.pasta.f1">Semola di grano duro</span></div>
+          <div class="feature-item"><i class="fas fa-leaf"></i> <span data-i18n="show.pasta.f2">Linea integrale</span></div>
+          <div class="feature-item"><i class="fas fa-seedling"></i> <span data-i18n="show.pasta.f3">Farro monococco</span></div>
+          <div class="feature-item"><i class="fas fa-award"></i> <span data-i18n="show.pasta.f4">Riso Carnaroli, Arborio</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE — SALUMI
+     ============================================================ -->
+<section class="showcase-section" id="salumi">
+  <div class="container">
+    <div class="showcase-grid reverse reveal">
+      <div class="showcase-visual">
+        <div class="showcase-img-1">
+          <img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=900&auto=format&fit=crop" alt="Salumi italiani" loading="lazy">
+        </div>
+        <div class="showcase-img-2">
+          <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=900&auto=format&fit=crop" alt="Prosciutto" loading="lazy">
+        </div>
+        <div class="showcase-badge">
+          <span class="num">15+</span>
+          <span class="lbl" data-i18n="show.cured.badge">Specialità</span>
+        </div>
+      </div>
+      <div class="showcase-content">
+        <span class="eyebrow" data-i18n="show.cured.eyebrow">Varietà di Salumi</span>
+        <h2 class="display-title"><span data-i18n="show.cured.t1">La norcineria</span> <em data-i18n="show.cured.t2">italiana</em></h2>
+        <p data-i18n="show.cured.p1">Salame Stroghino, Salame Mariola, Spalla Cotto, Cuor di Prosciutto, Gola Guanciale, Mortadella con Pistacchi, Prosciutto Parma 24 e 30 mesi, Prosciutto San Daniele con osso e disossato, Lonzardo, Lardo Nostrano, Prosciutto Scelto Golosa Qualità.</p>
+        <div class="mini-products">
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=400&auto=format&fit=crop" alt="Salame" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQS401</div>
+              <h4>Salame Stroghino</h4>
+              <div class="weight">0,2–0,3 kg</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=400&auto=format&fit=crop" alt="Mortadella" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQS403</div>
+              <h4>Mortadella Pistacchi</h4>
+              <div class="weight">6 kg</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=400&auto=format&fit=crop" alt="Parma" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQS407</div>
+              <h4>Parma 24 Mesi</h4>
+              <div class="weight">7–8,5 kg</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?q=80&w=400&auto=format&fit=crop" alt="San Daniele" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQP501</div>
+              <h4>San Daniele</h4>
+              <div class="weight">6–9 kg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE — FORMAGGI
+     ============================================================ -->
+<section class="showcase-section alt" id="formaggi">
+  <div class="container">
+    <div class="showcase-grid reveal">
+      <div class="showcase-visual">
+        <div class="showcase-img-1">
+          <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=900&auto=format&fit=crop" alt="Caciocavallo" loading="lazy">
+        </div>
+        <div class="showcase-img-2">
+          <img src="https://images.unsplash.com/photo-1452195100486-9cc805987862?q=80&w=900&auto=format&fit=crop" alt="Pecorino" loading="lazy">
+        </div>
+        <div class="showcase-badge">
+          <span class="num">30+</span>
+          <span class="lbl" data-i18n="show.cheese.badge">Varietà</span>
+        </div>
+      </div>
+      <div class="showcase-content">
+        <span class="eyebrow gold" data-i18n="show.cheese.eyebrow">Varietà di Formaggi</span>
+        <h2 class="display-title"><span data-i18n="show.cheese.t1">L'arte casearia</span> <em data-i18n="show.cheese.t2">italiana</em></h2>
+        <p data-i18n="show.cheese.p1">Caciocavallo affinato in grotta, in vinaccia, affumicato, al peperoncino, stravecchio, Altartufo, fresco, Occhio Dolce, Caciocavallo Cilentano. Caciotte di pecora Biasu, Pecorino Bustianu, Pecorino Maturo Bobore. Formaggi caprini Poggio Conte, Di Conte, In Grotta.</p>
+        <p data-i18n="show.cheese.p2">E ancora: La Regina Bianca, L'Ambasciatrice, Il Creto Gustoso al Pepe Nero e Rosa, Il Don Carmelo, Granducato di Castro Riserva, Il Riserva Ducato di Castro, L'Innominato, Il Qualitoso, Il Fiore di Giglio, La Gran Giulia, La Rosetta di Mucca, Piadoro, Il Pira Gustoso, Il Super Tomato Reale, Blu Dolce Erborinato, L'Ovale, Bianca Verde, L'Aromatico Rosmarino, Il Fienile Gustoso, Il Nocino in Foglie, Al Ceriatoso, Il Fruttato.</p>
+        <div class="feature-list">
+          <div class="feature-item"><i class="fas fa-clock"></i> <span data-i18n="show.cheese.f1">Stagionature 30–150 gg</span></div>
+          <div class="feature-item"><i class="fas fa-certificate"></i> <span data-i18n="show.cheese.f2">Latte crudo e pastorizzato</span></div>
+          <div class="feature-item"><i class="fas fa-mountain"></i> <span data-i18n="show.cheese.f3">Affinati in grotta</span></div>
+          <div class="feature-item"><i class="fas fa-seedling"></i> <span data-i18n="show.cheese.f4">Erborinati e caprini</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE — MIELE & SOTTOLI
+     ============================================================ -->
+<section class="showcase-section" id="miele">
+  <div class="container">
+    <div class="showcase-grid reverse reveal">
+      <div class="showcase-visual">
+        <div class="showcase-img-1">
+          <img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=900&auto=format&fit=crop" alt="Miele" loading="lazy">
+        </div>
+        <div class="showcase-img-2">
+          <img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=900&auto=format&fit=crop" alt="Sottoli" loading="lazy">
+        </div>
+        <div class="showcase-badge">
+          <span class="num">20+</span>
+          <span class="lbl" data-i18n="show.honey.badge">Prodotti</span>
+        </div>
+      </div>
+      <div class="showcase-content">
+        <span class="eyebrow teal" data-i18n="show.honey.eyebrow">Miele & Sottoli</span>
+        <h2 class="display-title"><span data-i18n="show.honey.t1">Dalla natura</span> <em data-i18n="show.honey.t2">alla tavola</em></h2>
+        <p data-i18n="show.honey.p1">Miele di Ailanto, Castagno, Erica, Millefiori, Sulla Bio e Macchia Mediterranea in formati 45g, 500g e 1000g.</p>
+        <p data-i18n="show.honey.p2">Sottoli: Carciofi interi e arrostiti, Friarelli, Funghi di Muschio, Funghi Orecchiette, Funghi Pioppini, Melanzane a fette, a involtini e a filetti, Peperonata alla Contadina, Scarole con Olive e Capperi, Peperoni Arrostiti, Pesche allo Sciroppo.</p>
+        <div class="mini-products">
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=400&auto=format&fit=crop" alt="Miele" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQAF002</div>
+              <h4>Miele Ailanto</h4>
+              <div class="weight">500g</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1587049354694-4f5f5f5f5f5f?q=80&w=400&auto=format&fit=crop" alt="Miele" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQAF010</div>
+              <h4>Miele Sulla Bio</h4>
+              <div class="weight">500g</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=400&auto=format&fit=crop" alt="Carciofi" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQC1404</div>
+              <h4>Carciofi all'Olio</h4>
+              <div class="weight">580g</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?q=80&w=400&auto=format&fit=crop" alt="Melanzane" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQC1421</div>
+              <h4>Melanzane a Fette</h4>
+              <div class="weight">580g</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE — TARTUFI
+     ============================================================ -->
+<section class="showcase-section dark" id="tartufi">
+  <div class="container">
+    <div class="showcase-grid reveal">
+      <div class="showcase-visual">
+        <div class="showcase-img-1">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=900&auto=format&fit=crop" alt="Tartufo" loading="lazy">
+        </div>
+        <div class="showcase-img-2">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900&auto=format&fit=crop" alt="Crema tartufo" loading="lazy">
+        </div>
+        <div class="showcase-badge">
+          <span class="num">100%</span>
+          <span class="lbl" data-i18n="show.truffles.badge">Italiano</span>
+        </div>
+      </div>
+      <div class="showcase-content">
+        <span class="eyebrow" data-i18n="show.truffles.eyebrow">Martelli Fabiano · Tartufi dal 1976</span>
+        <h2 class="display-title"><span data-i18n="show.truffles.t1">L'oro nero</span> <em data-i18n="show.truffles.t2">d'Italia</em></h2>
+        <p data-i18n="show.truffles.p1">Cremosa Altartufo, Crema Regina Altartufo Bianco, Condimento a base di Burro e Tartufo, Burro e Tartufo Estivo, Olio Aromatizzato Altartufo Bianco in formati 90g, 180g, 250ml, 500ml e 5000ml.</p>
+        <p data-i18n="show.truffles.p2">Briciola Altartufo Estivo Congelato 70g: tartufo estivo (Tuber Aestivum Vitt.) intero, spezzato, a fette o briciola. Il tartufo italiano selezionato con cura.</p>
+        <div class="feature-list">
+          <div class="feature-item"><i class="fas fa-mortar-pestle"></i> <span data-i18n="show.truffles.f1">Tartufo bianchetto</span></div>
+          <div class="feature-item"><i class="fas fa-mortar-pestle"></i> <span data-i18n="show.truffles.f2">Tartufo estivo</span></div>
+          <div class="feature-item"><i class="fas fa-certificate"></i> <span data-i18n="show.truffles.f3">Origine Italia</span></div>
+          <div class="feature-item"><i class="fas fa-star"></i> <span data-i18n="show.truffles.f4">Qualità premium</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SHOWCASE — ALCOLICI
+     ============================================================ -->
+<section class="showcase-section" id="alcolici">
+  <div class="container">
+    <div class="showcase-grid reverse reveal">
+      <div class="showcase-visual">
+        <div class="showcase-img-1">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=900&auto=format&fit=crop" alt="Doppio Senso" loading="lazy">
+        </div>
+        <div class="showcase-img-2">
+          <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=900&auto=format&fit=crop" alt="Grappa" loading="lazy">
+        </div>
+        <div class="showcase-badge">
+          <span class="num">1911</span>
+          <span class="lbl" data-i18n="show.spirits.badge">Dal</span>
+        </div>
+      </div>
+      <div class="showcase-content">
+        <span class="eyebrow" data-i18n="show.spirits.eyebrow">Morelli 1911 · Distilleria Artigianale</span>
+        <h2 class="display-title"><span data-i18n="show.spirits.t1">Distillati</span> <em data-i18n="show.spirits.t2">e liquori</em></h2>
+        <p data-i18n="show.spirits.p1">Fondata nel 1911 dal Cavalier Leonello Morelli, la distilleria produce liquori artigianali nel cuore della Valdera. Grappe Toscane, Grappa 98 Invecchiata, Grappa di Moscato, Chianti, Brunello, Morellino, Amarò, Limoncino, Spiriti, Gin Botanico, Creme e molto altro.</p>
+        <p data-i18n="show.spirits.p2">Doppio Senso: nato dalla collaborazione tra Noi, la Qualità e Morelli 1911. Un liquore unico che unisce il gusto tradizionale del rum con l'innovazione del caramello salato. 35% vol. Disponibile in formato Baby (0,1L), Special Edition (0,7L), Standard (0,7L), Slim (1,5L), Bombolo (1,5L) e Maxi (4,5L).</p>
+        <div class="mini-products">
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=400&auto=format&fit=crop" alt="Doppio Senso" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">GLQ004</div>
+              <h4>Doppio Senso</h4>
+              <div class="weight">0,7 L · 35%</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=400&auto=format&fit=crop" alt="Grappa" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQM002</div>
+              <h4>Grappa Toscana</h4>
+              <div class="weight">0,70 L</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=400&auto=format&fit=crop" alt="Limoncino" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQM072</div>
+              <h4>Limoncino</h4>
+              <div class="weight">0,50 L</div>
+            </div>
+          </div>
+          <div class="mini-product">
+            <div class="mini-product-img"><img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=400&auto=format&fit=crop" alt="Grappa 98" loading="lazy"></div>
+            <div class="mini-product-body">
+              <div class="code">NQM016</div>
+              <h4>Grappa 98 Invecchiata</h4>
+              <div class="weight">0,70 L</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INFO BANNER — SHIPPING
+     ============================================================ -->
+<section class="info-banner">
+  <div class="container info-banner-inner">
+    <div>
+      <h3 data-i18n="banner.title">Spedizioni in Italia ed estero</h3>
+      <p data-i18n="banner.sub">Consegne gratuite su Roma entro il GRA · Lazio e altre regioni con costo variabile</p>
+    </div>
+    <a href="#contatti" class="btn-gold">
+      <i class="fas fa-phone"></i> <span data-i18n="banner.cta">Richiedi informazioni</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT SECTION
+     ============================================================ -->
+<section class="contact-section" id="contatti">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow blue" data-i18n="contact.eyebrow">Contatti</span>
+      <h2 class="display-title"><span data-i18n="contact.t1">Parliamo del</span> <em data-i18n="contact.t2">tuo ordine</em></h2>
+      <p data-i18n="contact.p">Siamo a tua disposizione per informazioni sui prodotti, listini, spedizioni e collaborazioni. Contattaci direttamente o vieni a trovarci nel nostro showroom a Roma.</p>
+
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-building"></i></div>
+          <div class="contact-item-body">
+            <strong data-i18n="contact.company">Gruppo Noi, la qualità srl</strong>
+            <span>Viale C. Sabatini, 161 — 00144 Roma (RM), Italia</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+          <div class="contact-item-body">
+            <strong data-i18n="contact.phoneLabel">Telefono</strong>
+            <span>
+              <a href="tel:+390666995093">+39 06 66995093</a> ·
+              <a href="tel:+393791413514">+39 379 141 3514</a><br>
+              <a href="tel:+390666993421">+39 06 66993421</a>
+            </span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-item-body">
+            <strong data-i18n="contact.emailLabel">Email</strong>
+            <span>
+              <a href="mailto:info@noilaqualita.it">info@noilaqualita.it</a><br>
+              <a href="mailto:info@golosaaqualita.it">info@golosaaqualita.it</a>
+            </span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-globe"></i></div>
+          <div class="contact-item-body">
+            <strong data-i18n="contact.webLabel">Web</strong>
+            <span>www.noilaqualit.it</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i class="fas fa-truck"></i></div>
+          <div class="contact-item-body">
+            <strong data-i18n="contact.shipLabel">Spedizioni</strong>
+            <span data-i18n="contact.shipText">Consegne gratuite su Roma entro il GRA. Lazio e altre regioni con costo variabile da definire al momento dell'ordine.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-map reveal">
+      <iframe src="https://www.google.com/maps?q=Viale+C.+Sabatini+161,+00144+Roma,+Italy&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Noi, la qualità srl — Roma"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-img" style="background:rgba(255,255,255,0.1);">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='tf' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234FB3A8'/><stop offset='1' stop-color='%232E8A80'/></linearGradient><linearGradient id='bf' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%234A85CC'/><stop offset='1' stop-color='%231E5AA8'/></linearGradient><linearGradient id='gf' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FBD07A'/><stop offset='1' stop-color='%23D89A1F'/></linearGradient></defs><circle cx='100' cy='100' r='58' fill='url(%23bf)'/><path d='M20 70 Q60 45 100 55 Q140 65 180 60' stroke='url(%23tf)' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M20 130 Q60 155 100 145 Q140 135 180 140' stroke='url(%23gf)' stroke-width='9' fill='none' stroke-linecap='round'/></svg>" alt="Noi, la qualità">
+          </div>
+          <div class="logo-text">
+            <span class="brand" style="color:var(--cream);"><span style="color:var(--gold);">Golosa</span><span style="color:var(--teal-light);">qualità</span></span>
+            <small style="color:var(--gold);">High Quality Food</small>
+          </div>
+        </div>
+        <p data-i18n="footer.desc">Gruppo Noi, la qualità srl — Selezione premium di prodotti italiani artigianali. Distribuzione e qualità dal 1911.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.catalog">Catalogo</h4>
+        <ul>
+          <li><a href="#pasta"><i class="fas fa-angle-right"></i> <span data-i18n="footer.pasta">Pasta & Riso</span></a></li>
+          <li><a href="#salumi"><i class="fas fa-angle-right"></i> <span data-i18n="footer.cured">Salumi</span></a></li>
+          <li><a href="#formaggi"><i class="fas fa-angle-right"></i> <span data-i18n="footer.cheese">Formaggi</span></a></li>
+          <li><a href="#miele"><i class="fas fa-angle-right"></i> <span data-i18n="footer.honey">Miele & Sottoli</span></a></li>
+          <li><a href="#tartufi"><i class="fas fa-angle-right"></i> <span data-i18n="footer.truffles">Tartufi</span></a></li>
+          <li><a href="#alcolici"><i class="fas fa-angle-right"></i> <span data-i18n="footer.spirits">Alcolici</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.info">Informazioni</h4>
+        <ul>
+          <li><a href="#top"><i class="fas fa-angle-right"></i> <span data-i18n="footer.about">Chi siamo</span></a></li>
+          <li><a href="#contatti"><i class="fas fa-angle-right"></i> <span data-i18n="footer.contact">Contatti</span></a></li>
+          <li><a href="#"><i class="fas fa-angle-right"></i> <span data-i18n="footer.shipping">Spedizioni</span></a></li>
+          <li><a href="#"><i class="fas fa-angle-right"></i> <span data-i18n="footer.privacy">Privacy</span></a></li>
+          <li><a href="#"><i class="fas fa-angle-right"></i> <span data-i18n="footer.terms">Termini</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.contactTitle">Contatti</h4>
+        <div class="footer-contact-item">
+          <i class="fas fa-building"></i>
+          <span>Gruppo Noi, la qualità srl<br>Viale C. Sabatini, 161<br>00144 Roma (RM), Italia</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>
+            <a href="tel:+390666995093">+39 06 66995093</a><br>
+            <a href="tel:+393791413514">+39 379 141 3514</a>
+          </span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>
+            <a href="mailto:info@noilaqualita.it">info@noilaqualita.it</a><br>
+            <a href="mailto:info@golosaaqualita.it">info@golosaaqualita.it</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Gruppo Noi, la qualità srl — <span data-i18n="footer.rights">Tutti i diritti riservati</span>. P.IVA IT00000000000</span>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacyPolicy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.cookiePolicy">Cookie Policy</a>
+        <a href="#" data-i18n="footer.termsConditions">Termini & Condizioni</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     PRELOADER
+     ============================================================ */
+  (function() {
+    const preloader = document.getElementById('preloader');
+    const bg = document.getElementById('preloaderBg');
+
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'preloader-particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.top = (60 + Math.random() * 30) + '%';
+      p.style.animationDelay = (Math.random() * 3) + 's';
+      p.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+      bg.appendChild(p);
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+        document.body.classList.remove('no-scroll');
+      }, 1400);
+    });
+
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+      document.body.classList.remove('no-scroll');
+    }, 2200);
+  })();
+
+  /* ============================================================
+     SIDE MENU
+     ============================================================ */
+  function openSideMenu() {
+    document.getElementById('sideMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSideMenu() {
+    document.getElementById('sideMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSideMenu(); });
+
+  /* ============================================================
+     TRANSLATIONS
+     ============================================================ */
+  const translations = {
+    it: {
+      'nav.catalog': 'Catalogo', 'nav.pasta': 'Pasta', 'nav.cheese': 'Formaggi', 'nav.cured': 'Salumi', 'nav.contact': 'Contatti', 'nav.explore': 'Esplora',
+      'menu.title': 'Esplora il <em>catalogo</em>', 'menu.catalog': 'Catalogo Completo', 'menu.pasta': 'Pasta & Riso', 'menu.cured': 'Salumi', 'menu.cheese': 'Formaggi', 'menu.honey': 'Miele & Sottoli', 'menu.truffles': 'Tartufi', 'menu.spirits': 'Alcolici', 'menu.contact': 'Contatti',
+      'menu.directContact': 'Contatti Diretti', 'menu.shipping': 'Consegne gratuite su Roma entro il GRA', 'menu.follow': 'Seguici',
+      'marquee.1': 'Pasta Artigianale', 'marquee.2': 'Riso Carnaroli', 'marquee.3': 'Salumi di Parma', 'marquee.4': 'Caciocavallo Affinato', 'marquee.5': 'Miele Biologico', 'marquee.6': 'Tartufo Estivo', 'marquee.7': 'Doppio Senso', 'marquee.8': 'Grappa Toscana',
+      'hero.badgeStrong': 'Eccellenza Italiana', 'hero.badgeRest': '· Dal 1911',
+      'hero.t1': 'Il gusto autentico', 'hero.t2': "dell'", 'hero.t3': 'Italia artigianale',
+      'hero.desc': "Selezione premium di prodotti italiani: pasta, riso, salumi, formaggi, miele, sottoli, tartufi e alcolici. Ogni prodotto racconta una storia di tradizione, territorio e passione.",
+      'hero.cta1': 'Scopri il Catalogo', 'hero.cta2': 'Contattaci',
+      'hero.tr1a': '100% Italiano', 'hero.tr1b': 'Filiera certificata', 'hero.tr2a': 'Spedizioni', 'hero.tr2b': 'Italia ed estero', 'hero.tr3a': 'DOP / IGP', 'hero.tr3b': 'Certificazioni europee',
+      'hero.reviews': '2.400+ clienti', 'hero.certTitle': 'Made in Italy', 'hero.certSub': 'Qualità garantita', 'hero.since': 'Dal',
+      'brand.tagline': 'Qualità italiana dal 1911', 'brand.sub': 'Distribuzione e selezione',
+      'cat.eyebrow': 'Esplora per categoria', 'cat.title': 'Le nostre categorie', 'cat.sub': "Dalle varietà di pasta ai formaggi affinati, ogni categoria racchiude l'eccellenza della tradizione italiana.",
+      'cat.pasta': 'Pasta & Riso', 'cat.pastaSub': 'Pasta di semola, grano duro e riso', 'cat.cured': 'Salumi', 'cat.curedSub': 'Prosciutti, salami e mortadelle', 'cat.cheese': 'Formaggi', 'cat.cheeseSub': 'Caciocavallo, pecorino, caciotte', 'cat.honey': 'Miele & Sottoli', 'cat.honeySub': 'Miele, carciofi, funghi, melanzane', 'cat.truffles': 'Tartufi', 'cat.trufflesSub': 'Creme e condimenti al tartufo', 'cat.spirits': 'Alcolici', 'cat.spiritsSub': 'Grappe, liquori, Doppio Senso', 'cat.discover': 'Scopri',
+      'prod.eyebrow': 'Selezione Premium', 'prod.t1': 'I nostri', 'prod.t2': 'prodotti', 'prod.t3': 'in evidenza', 'prod.sub': 'Ogni prodotto è selezionato a mano, con una storia di territorio e tradizione alle spalle.',
+      'prod.all': 'Tutti', 'prod.pasta': 'Pasta', 'prod.rice': 'Riso', 'prod.cured': 'Salumi', 'prod.cheese': 'Formaggi', 'prod.honey': 'Miele', 'prod.preserves': 'Sottoli', 'prod.truffles': 'Tartufi', 'prod.spirits': 'Alcolici',
+      'p.fresh': 'Pasta', 'p.integral': 'Integrale', 'p.rice': 'Riso', 'p.cured': 'Salumi', 'p.cheese': 'Formaggi', 'p.honey': 'Miele', 'p.organic': 'Bio', 'p.preserves': 'Sottoli', 'p.truffles': 'Tartufi', 'p.spirits': 'Alcolici',
+      'p.fettuccine.desc': 'Pasta di semola di grano duro, trafilata al bronzo. Perfetta con ragù e sughi ricchi.',
+      'p.linguine.desc': 'Pasta lunga di semola, ideale per piatti di mare e condimenti delicati.',
+      'p.paccheri.desc': 'Formato tipico campano, perfetto per essere farcito o servito con sughi densi.',
+      'p.rigatoni.desc': 'Pasta corta rigata, trattiene perfettamente ogni tipo di sugo.',
+      'p.pici.desc': 'Pasta integrale di semola, ricca di fibre. Ideale per una cucina sana e gustosa.',
+      'p.carnaroli.desc': 'Il re dei risi per risotti. Grani lunghi e consistenti, eccellente assorbimento.',
+      'p.arborio.desc': 'Riso classico per risotti cremosi, con chicco grande e perla centrale.',
+      'p.nero.desc': 'Riso nero integrale, ricco di antociani. Perfetto per insalate e piatti gourmet.',
+      'p.stroghino.desc': 'Rifilature di Culatello con concia di vino, pepe ed aglio. Gusto fresco e dolce.',
+      'p.parma24.desc': 'Prosciutto di Parma DOP con osso, stagionato 24 mesi. Gusto delicato e dolce.',
+      'p.mortadella.desc': 'Mortadella artigianale con pistacchi interi. Equilibrio perfetto tra dolcezza e sapidità.',
+      'p.lonzardo.desc': 'Prodotto esclusivo: la sapidità della lonza incontra la dolcezza del lardo.',
+      'p.lardo.desc': 'Lardo aromatizzato e stagionato. Perfetto su pane caldo e bruschette.',
+      'p.caciogrotta.desc': 'Affinato in grotta 90-120 giorni. Struttura compatta, tipo grana.',
+      'p.caciotartufo.desc': 'Con tartufo estivo (Tuber Aestivum) 3%. Aroma intenso e raffinato.',
+      'p.cacioaffumicato.desc': 'Affumicato con fumi di legno di faggio. Intenso sapore affumicato.',
+      'p.bustianu.desc': 'Pecorino sardo con crosta dorata. Sapore gradevole, leggermente piccante.',
+      'p.ailanto.desc': 'Miele delicato e aromatico di Ailanto italiano. Perfetto per colazione.',
+      'p.castagno.desc': 'Miele di castagno dal gusto intenso e leggermente amaro. Ricco di minerali.',
+      'p.sulla.desc': 'Miele biologico di sulla, dal sapore delicato e floreale. Certificato Bio.',
+      'p.carciofi.desc': 'Carciofi arrostiti e conservati in olio. Delicati e pronti da gustare.',
+      'p.funghi.desc': 'Funghi di muschio selezionati, conservati in olio. Sapore autentico del bosco.',
+      'p.melanzane.desc': 'Melanzane a fette conservate in olio. Perfette per antipasti e bruschette.',
+      'p.crema.desc': 'Condimento a base di formaggi e tartufi. Cremosa e dal profumo intenso.',
+      'p.burro.desc': 'Burro 95% con tartufo bianchetto e tartufo estivo. Perfetto per crostini e paste.',
+      'p.oliotartufo.desc': 'Olio 95% con tartufo bianchetto e tartufo estivo. Ideale per condire a crudo.',
+      'p.doppiosenso.desc': 'Liquore a base di rum e caramello salato. 35% vol. Unico nel suo genere.',
+      'p.grappa.desc': 'Grappa toscana tradizionale, distillata con metodo artigianale dal 1911.',
+      'p.limoncino.desc': 'Liquore al limone dal gusto fresco e intenso. Perfetto come digestivo.',
+      'show.pasta.eyebrow': 'Varietà di Pasta & Riso', 'show.pasta.t1': 'La tradizione', 'show.pasta.t2': 'in ogni formato',
+      'show.pasta.p1': 'Dalla pasta di semola di grano duro ai risi pregiati Aramino: Spaghettoni, Mezzi Paccheri, Lumaconi, Mezze Maniche, Penne Lisce, Rigatoni, Tubettoni, Fusilloni, Fettuccine, Linguine, Paccheri, Pasta Mista, Mafalde, Taccole, Ziti Tagliati, Tubettini.',
+      'show.pasta.p2': 'Anche nelle versioni integrali: Pici, Pappardelle, Tagliatelle, Tagliolini, Spaghettoni, Linguine, Pacchetti, Mezzi Pacchetti, Penne, Fusilloni Rigati, Rigatoni, Casarecce, Tubetti Rigati, Tempestine, Conchiglie Rigate, Fusilli Farro Monococco, Pennette Farro Monococco, Tagliatelle Farro Monococco.',
+      'show.pasta.f1': 'Semola di grano duro', 'show.pasta.f2': 'Linea integrale', 'show.pasta.f3': 'Farro monococco', 'show.pasta.f4': 'Riso Carnaroli, Arborio', 'show.pasta.badge': 'Formati',
+      'show.cured.eyebrow': 'Varietà di Salumi', 'show.cured.t1': 'La norcineria', 'show.cured.t2': 'italiana',
+      'show.cured.p1': 'Salame Stroghino, Salame Mariola, Spalla Cotto, Cuor di Prosciutto, Gola Guanciale, Mortadella con Pistacchi, Prosciutto Parma 24 e 30 mesi, Prosciutto San Daniele con osso e disossato, Lonzardo, Lardo Nostrano, Prosciutto Scelto Golosa Qualità.',
+      'show.cured.badge': 'Specialità',
+      'show.cheese.eyebrow': 'Varietà di Formaggi', 'show.cheese.t1': "L'arte casearia", 'show.cheese.t2': 'italiana',
+      'show.cheese.p1': 'Caciocavallo affinato in grotta, in vinaccia, affumicato, al peperoncino, stravecchio, Altartufo, fresco, Occhio Dolce, Caciocavallo Cilentano. Caciotte di pecora Biasu, Pecorino Bustianu, Pecorino Maturo Bobore. Formaggi caprini Poggio Conte, Di Conte, In Grotta.',
+      'show.cheese.p2': "E ancora: La Regina Bianca, L'Ambasciatrice, Il Creto Gustoso al Pepe Nero e Rosa, Il Don Carmelo, Granducato di Castro Riserva, Il Riserva Ducato di Castro, L'Innominato, Il Qualitoso, Il Fiore di Giglio, La Gran Giulia, La Rosetta di Mucca, Piadoro, Il Pira Gustoso, Il Super Tomato Reale, Blu Dolce Erborinato, L'Ovale, Bianca Verde, L'Aromatico Rosmarino, Il Fienile Gustoso, Il Nocino in Foglie, Al Ceriatoso, Il Fruttato.",
+      'show.cheese.f1': 'Stagionature 30–150 gg', 'show.cheese.f2': 'Latte crudo e pastorizzato', 'show.cheese.f3': 'Affinati in grotta', 'show.cheese.f4': 'Erborinati e caprini', 'show.cheese.badge': 'Varietà',
+      'show.honey.eyebrow': 'Miele & Sottoli', 'show.honey.t1': 'Dalla natura', 'show.honey.t2': 'alla tavola',
+      'show.honey.p1': 'Miele di Ailanto, Castagno, Erica, Millefiori, Sulla Bio e Macchia Mediterranea in formati 45g, 500g e 1000g.',
+      'show.honey.p2': 'Sottoli: Carciofi interi e arrostiti, Friarelli, Funghi di Muschio, Funghi Orecchiette, Funghi Pioppini, Melanzane a fette, a involtini e a filetti, Peperonata alla Contadina, Scarole con Olive e Capperi, Peperoni Arrostiti, Pesche allo Sciroppo.',
+      'show.honey.badge': 'Prodotti',
+      'show.truffles.eyebrow': 'Martelli Fabiano · Tartufi dal 1976', 'show.truffles.t1': "L'oro nero", 'show.truffles.t2': "d'Italia",
+      'show.truffles.p1': 'Cremosa Altartufo, Crema Regina Altartufo Bianco, Condimento a base di Burro e Tartufo, Burro e Tartufo Estivo, Olio Aromatizzato Altartufo Bianco in formati 90g, 180g, 250ml, 500ml e 5000ml.',
+      'show.truffles.p2': 'Briciola Altartufo Estivo Congelato 70g: tartufo estivo (Tuber Aestivum Vitt.) intero, spezzato, a fette o briciola. Il tartufo italiano selezionato con cura.',
+      'show.truffles.f1': 'Tartufo bianchetto', 'show.truffles.f2': 'Tartufo estivo', 'show.truffles.f3': 'Origine Italia', 'show.truffles.f4': 'Qualità premium', 'show.truffles.badge': 'Italiano',
+      'show.spirits.eyebrow': 'Morelli 1911 · Distilleria Artigianale', 'show.spirits.t1': 'Distillati', 'show.spirits.t2': 'e liquori',
+      'show.spirits.p1': 'Fondata nel 1911 dal Cavalier Leonello Morelli, la distilleria produce liquori artigianali nel cuore della Valdera. Grappe Toscane, Grappa 98 Invecchiata, Grappa di Moscato, Chianti, Brunello, Morellino, Amarò, Limoncino, Spiriti, Gin Botanico, Creme e molto altro.',
+      'show.spirits.p2': 'Doppio Senso: nato dalla collaborazione tra Noi, la Qualità e Morelli 1911. Un liquore unico che unisce il gusto tradizionale del rum con l\'innovazione del caramello salato. 35% vol. Disponibile in formato Baby (0,1L), Special Edition (0,7L), Standard (0,7L), Slim (1,5L), Bombolo (1,5L) e Maxi (4,5L).',
+      'show.spirits.badge': 'Dal',
+      'banner.title': 'Spedizioni in Italia ed estero', 'banner.sub': 'Consegne gratuite su Roma entro il GRA · Lazio e altre regioni con costo variabile', 'banner.cta': 'Richiedi informazioni',
+      'contact.eyebrow': 'Contatti', 'contact.t1': 'Parliamo del', 'contact.t2': 'tuo ordine', 'contact.p': 'Siamo a tua disposizione per informazioni sui prodotti, listini, spedizioni e collaborazioni. Contattaci direttamente o vieni a trovarci nel nostro showroom a Roma.',
+      'contact.company': 'Gruppo Noi, la qualità srl', 'contact.phoneLabel': 'Telefono', 'contact.emailLabel': 'Email', 'contact.webLabel': 'Web', 'contact.shipLabel': 'Spedizioni', 'contact.shipText': "Consegne gratuite su Roma entro il GRA. Lazio e altre regioni con costo variabile da definire al momento dell'ordine.",
+      'footer.desc': 'Gruppo Noi, la qualità srl — Selezione premium di prodotti italiani artigianali. Distribuzione e qualità dal 1911.',
+      'footer.catalog': 'Catalogo', 'footer.pasta': 'Pasta & Riso', 'footer.cured': 'Salumi', 'footer.cheese': 'Formaggi', 'footer.honey': 'Miele & Sottoli', 'footer.truffles': 'Tartufi', 'footer.spirits': 'Alcolici',
+      'footer.info': 'Informazioni', 'footer.about': 'Chi siamo', 'footer.contact': 'Contatti', 'footer.shipping': 'Spedizioni', 'footer.privacy': 'Privacy', 'footer.terms': 'Termini', 'footer.contactTitle': 'Contatti',
+      'footer.rights': 'Tutti i diritti riservati', 'footer.privacyPolicy': 'Privacy Policy', 'footer.cookiePolicy': 'Cookie Policy', 'footer.termsConditions': 'Termini & Condizioni'
+    },
+    en: {
+      'nav.catalog': 'Catalog', 'nav.pasta': 'Pasta', 'nav.cheese': 'Cheese', 'nav.cured': 'Cured Meats', 'nav.contact': 'Contact', 'nav.explore': 'Explore',
+      'menu.title': 'Browse the <em>catalog</em>', 'menu.catalog': 'Full Catalog', 'menu.pasta': 'Pasta & Rice', 'menu.cured': 'Cured Meats', 'menu.cheese': 'Cheese', 'menu.honey': 'Honey & Preserves', 'menu.truffles': 'Truffles', 'menu.spirits': 'Spirits', 'menu.contact': 'Contact',
+      'menu.directContact': 'Direct Contact', 'menu.shipping': 'Free delivery in Rome within the GRA', 'menu.follow': 'Follow us',
+      'marquee.1': 'Artisan Pasta', 'marquee.2': 'Carnaroli Rice', 'marquee.3': 'Parma Cured Meats', 'marquee.4': 'Aged Caciocavallo', 'marquee.5': 'Organic Honey', 'marquee.6': 'Summer Truffle', 'marquee.7': 'Doppio Senso', 'marquee.8': 'Tuscan Grappa',
+      'hero.badgeStrong': 'Italian Excellence', 'hero.badgeRest': '· Since 1911',
+      'hero.t1': 'The authentic taste', 'hero.t2': 'of', 'hero.t3': 'artisan Italy',
+      'hero.desc': "A premium selection of Italian products: pasta, rice, cured meats, cheeses, honey, preserves, truffles and spirits. Each product tells a story of tradition, territory and passion.",
+      'hero.cta1': 'Explore the Catalog', 'hero.cta2': 'Contact Us',
+      'hero.tr1a': '100% Italian', 'hero.tr1b': 'Certified supply chain', 'hero.tr2a': 'Shipping', 'hero.tr2b': 'Italy and abroad', 'hero.tr3a': 'DOP / IGP', 'hero.tr3b': 'European certifications',
+      'hero.reviews': '2,400+ customers', 'hero.certTitle': 'Made in Italy', 'hero.certSub': 'Guaranteed quality', 'hero.since': 'Since',
+      'brand.tagline': 'Italian quality since 1911', 'brand.sub': 'Distribution and selection',
+      'cat.eyebrow': 'Explore by category', 'cat.title': 'Our categories', 'cat.sub': "From pasta varieties to aged cheeses, each category holds the excellence of Italian tradition.",
+      'cat.pasta': 'Pasta & Rice', 'cat.pastaSub': 'Semolina, durum wheat and rice', 'cat.cured': 'Cured Meats', 'cat.curedSub': 'Hams, salami and mortadella', 'cat.cheese': 'Cheese', 'cat.cheeseSub': 'Caciocavallo, pecorino, caciotte', 'cat.honey': 'Honey & Preserves', 'cat.honeySub': 'Honey, artichokes, mushrooms, aubergines', 'cat.truffles': 'Truffles', 'cat.trufflesSub': 'Truffle creams and condiments', 'cat.spirits': 'Spirits', 'cat.spiritsSub': 'Grappa, liqueurs, Doppio Senso', 'cat.discover': 'Discover',
+      'prod.eyebrow': 'Premium Selection', 'prod.t1': 'Our', 'prod.t2': 'featured', 'prod.t3': 'products', 'prod.sub': 'Each product is hand-selected, with a story of territory and tradition behind it.',
+      'prod.all': 'All', 'prod.pasta': 'Pasta', 'prod.rice': 'Rice', 'prod.cured': 'Cured Meats', 'prod.cheese': 'Cheese', 'prod.honey': 'Honey', 'prod.preserves': 'Preserves', 'prod.truffles': 'Truffles', 'prod.spirits': 'Spirits',
+      'p.fresh': 'Pasta', 'p.integral': 'Whole Wheat', 'p.rice': 'Rice', 'p.cured': 'Cured Meats', 'p.cheese': 'Cheese', 'p.honey': 'Honey', 'p.organic': 'Organic', 'p.preserves': 'Preserves', 'p.truffles': 'Truffles', 'p.spirits': 'Spirits',
+      'p.fettuccine.desc': 'Durum wheat semolina pasta, bronze-drawn. Perfect with ragù and rich sauces.',
+      'p.linguine.desc': 'Long semolina pasta, ideal for seafood dishes and delicate condiments.',
+      'p.paccheri.desc': 'Typical Campanian format, perfect for stuffing or serving with thick sauces.',
+      'p.rigatoni.desc': 'Short ridged pasta, perfectly holds any type of sauce.',
+      'p.pici.desc': 'Whole wheat semolina pasta, rich in fiber. Ideal for healthy and tasty cooking.',
+      'p.carnaroli.desc': 'The king of rice for risotto. Long, consistent grains, excellent absorption.',
+      'p.arborio.desc': 'Classic rice for creamy risotto, with large grain and central pearl.',
+      'p.nero.desc': 'Whole grain black rice, rich in anthocyanins. Perfect for salads and gourmet dishes.',
+      'p.stroghino.desc': 'Culatello trimmings with wine, pepper and garlic curing. Fresh and sweet taste.',
+      'p.parma24.desc': 'Parma DOP ham with bone, aged 24 months. Delicate and sweet taste.',
+      'p.mortadella.desc': 'Artisan mortadella with whole pistachios. Perfect balance between sweetness and savoriness.',
+      'p.lonzardo.desc': 'Exclusive product: the savoriness of loin meets the sweetness of lard.',
+      'p.lardo.desc': 'Flavored and aged lard. Perfect on warm bread and bruschetta.',
+      'p.caciogrotta.desc': 'Cave-aged 90-120 days. Compact structure, grana type.',
+      'p.caciotartufo.desc': 'With summer truffle (Tuber Aestivum) 3%. Intense and refined aroma.',
+      'p.cacioaffumicato.desc': 'Smoked with beech wood fumes. Intense smoked flavor.',
+      'p.bustianu.desc': 'Sardinian pecorino with golden crust. Pleasant, slightly spicy flavor.',
+      'p.ailanto.desc': 'Delicate and aromatic Italian Ailanto honey. Perfect for breakfast.',
+      'p.castagno.desc': 'Chestnut honey with intense and slightly bitter taste. Rich in minerals.',
+      'p.sulla.desc': 'Organic sulla honey, with delicate and floral taste. Bio certified.',
+      'p.carciofi.desc': 'Roasted artichokes preserved in oil. Delicate and ready to enjoy.',
+      'p.funghi.desc': 'Selected moss mushrooms, preserved in oil. Authentic forest flavor.',
+      'p.melanzane.desc': 'Sliced aubergines preserved in oil. Perfect for appetizers and bruschetta.',
+      'p.crema.desc': 'Cheese and truffle based condiment. Creamy with intense aroma.',
+      'p.burro.desc': '95% butter with white truffle and summer truffle. Perfect for croutons and pasta.',
+      'p.oliotartufo.desc': '95% oil with white truffle and summer truffle. Ideal for raw seasoning.',
+      'p.doppiosenso.desc': 'Rum and salted caramel liqueur. 35% vol. One of a kind.',
+      'p.grappa.desc': 'Traditional Tuscan grappa, distilled with artisan method since 1911.',
+      'p.limoncino.desc': 'Lemon liqueur with fresh and intense taste. Perfect as a digestive.',
+      'show.pasta.eyebrow': 'Pasta & Rice Varieties', 'show.pasta.t1': 'Tradition', 'show.pasta.t2': 'in every format',
+      'show.pasta.p1': 'From durum wheat semolina pasta to premium Aramino rice: Spaghettoni, Mezzi Paccheri, Lumaconi, Mezze Maniche, Penne Lisce, Rigatoni, Tubettoni, Fusilloni, Fettuccine, Linguine, Paccheri, Pasta Mista, Mafalde, Taccole, Ziti Tagliati, Tubettini.',
+      'show.pasta.p2': 'Also in whole wheat versions: Pici, Pappardelle, Tagliatelle, Tagliolini, Spaghettoni, Linguine, Pacchetti, Mezzi Pacchetti, Penne, Fusilloni Rigati, Rigatoni, Casarecce, Tubetti Rigati, Tempestine, Conchiglie Rigate, Fusilli Farro Monococco, Pennette Farro Monococco, Tagliatelle Farro Monococco.',
+      'show.pasta.f1': 'Durum wheat semolina', 'show.pasta.f2': 'Whole wheat line', 'show.pasta.f3': 'Monococcum farro', 'show.pasta.f4': 'Carnaroli, Arborio rice', 'show.pasta.badge': 'Formats',
+      'show.cured.eyebrow': 'Cured Meat Varieties', 'show.cured.t1': 'Italian', 'show.cured.t2': 'charcuterie',
+      'show.cured.p1': 'Salame Stroghino, Salame Mariola, Cooked Shoulder, Heart of Ham, Gola Guanciale, Mortadella with Pistachios, Parma Ham 24 and 30 months, San Daniele Ham with bone and boneless, Lonzardo, Nostrano Lard, Golosa Qualità Selected Ham.',
+      'show.cured.badge': 'Specialties',
+      'show.cheese.eyebrow': 'Cheese Varieties', 'show.cheese.t1': 'The dairy art', 'show.cheese.t2': 'of Italy',
+      'show.cheese.p1': 'Caciocavallo aged in cave, in vinaccia, smoked, with chili, extra aged, Altartufo, fresh, Occhio Dolce, Caciocavallo Cilentano. Biasu sheep caciotte, Pecorino Bustianu, Pecorino Maturo Bobore. Goat cheeses Poggio Conte, Di Conte, In Grotta.',
+      'show.cheese.p2': "And more: La Regina Bianca, L'Ambasciatrice, Il Creto Gustoso al Pepe Nero e Rosa, Il Don Carmelo, Granducato di Castro Riserva, Il Riserva Ducato di Castro, L'Innominato, Il Qualitoso, Il Fiore di Giglio, La Gran Giulia, La Rosetta di Mucca, Piadoro, Il Pira Gustoso, Il Super Tomato Reale, Blu Dolce Erborinato, L'Ovale, Bianca Verde, L'Aromatico Rosmarino, Il Fienile Gustoso, Il Nocino in Foglie, Al Ceriatoso, Il Fruttato.",
+      'show.cheese.f1': 'Aging 30–150 days', 'show.cheese.f2': 'Raw and pasteurized milk', 'show.cheese.f3': 'Cave-aged', 'show.cheese.f4': 'Blue and goat cheeses', 'show.cheese.badge': 'Varieties',
+      'show.honey.eyebrow': 'Honey & Preserves', 'show.honey.t1': 'From nature', 'show.honey.t2': 'to the table',
+      'show.honey.p1': 'Ailanto, Chestnut, Heather, Wildflower, Organic Sulla and Mediterranean Scrub honey in 45g, 500g and 1000g formats.',
+      'show.honey.p2': 'Preserves: Whole and roasted artichokes, Friarelli, Moss mushrooms, Orecchiette mushrooms, Pioppini mushrooms, Sliced, rolled and filleted aubergines, Country-style peperonata, Escarole with olives and capers, Roasted peppers, Peaches in syrup.',
+      'show.honey.badge': 'Products',
+      'show.truffles.eyebrow': 'Martelli Fabiano · Truffles since 1976', 'show.truffles.t1': 'The black gold', 'show.truffles.t2': 'of Italy',
+      'show.truffles.p1': 'Creamy Altartufo, Regina Altartufo White Cream, Butter and Truffle condiment, Butter and Summer Truffle, White Altartufo Flavored Oil in 90g, 180g, 250ml, 500ml and 5000ml formats.',
+      'show.truffles.p2': 'Frozen Summer Altartufo Crumb 70g: summer truffle (Tuber Aestivum Vitt.) whole, broken, sliced or crumb. Italian truffle carefully selected.',
+      'show.truffles.f1': 'White truffle', 'show.truffles.f2': 'Summer truffle', 'show.truffles.f3': 'Italian origin', 'show.truffles.f4': 'Premium quality', 'show.truffles.badge': 'Italian',
+      'show.spirits.eyebrow': 'Morelli 1911 · Artisan Distillery', 'show.spirits.t1': 'Distillates', 'show.spirits.t2': 'and liqueurs',
+      'show.spirits.p1': 'Founded in 1911 by Cavalier Leonello Morelli, the distillery produces artisan liqueurs in the heart of Valdera. Tuscan Grappas, Grappa 98 Aged, Moscato Grappa, Chianti, Brunello, Morellino, Amarò, Limoncino, Spirits, Botanical Gin, Creams and much more.',
+      'show.spirits.p2': 'Doppio Senso: born from the collaboration between Noi, la Qualità and Morelli 1911. A unique liqueur that combines the traditional taste of rum with the innovation of salted caramel. 35% vol. Available in Baby (0.1L), Special Edition (0.7L), Standard (0.7L), Slim (1.5L), Bombolo (1.5L) and Maxi (4.5L) formats.',
+      'show.spirits.badge': 'Since',
+      'banner.title': 'Shipping in Italy and abroad', 'banner.sub': 'Free delivery in Rome within the GRA · Lazio and other regions with variable cost', 'banner.cta': 'Request information',
+      'contact.eyebrow': 'Contact', 'contact.t1': "Let's talk about", 'contact.t2': 'your order', 'contact.p': 'We are at your disposal for information on products, price lists, shipping and collaborations. Contact us directly or visit our showroom in Rome.',
+      'contact.company': 'Gruppo Noi, la qualità srl', 'contact.phoneLabel': 'Phone', 'contact.emailLabel': 'Email', 'contact.webLabel': 'Web', 'contact.shipLabel': 'Shipping', 'contact.shipText': 'Free delivery in Rome within the GRA. Lazio and other regions with variable cost to be defined at the time of order.',
+      'footer.desc': 'Gruppo Noi, la qualità srl — Premium selection of Italian artisan products. Distribution and quality since 1911.',
+      'footer.catalog': 'Catalog', 'footer.pasta': 'Pasta & Rice', 'footer.cured': 'Cured Meats', 'footer.cheese': 'Cheese', 'footer.honey': 'Honey & Preserves', 'footer.truffles': 'Truffles', 'footer.spirits': 'Spirits',
+      'footer.info': 'Information', 'footer.about': 'About us', 'footer.contact': 'Contact', 'footer.shipping': 'Shipping', 'footer.privacy': 'Privacy', 'footer.terms': 'Terms', 'footer.contactTitle': 'Contact',
+      'footer.rights': 'All rights reserved', 'footer.privacyPolicy': 'Privacy Policy', 'footer.cookiePolicy': 'Cookie Policy', 'footer.termsConditions': 'Terms & Conditions'
+    }
+  };
+
+  let currentLang = 'it';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    const dict = translations[lang];
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) {
+        if (key === 'menu.title' || key === 'hero.badgeStrong') {
+          el.innerHTML = dict[key];
+        } else {
+          el.textContent = dict[key];
+        }
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] !== undefined) el.placeholder = dict[key];
+    });
+
+    const toggle = document.getElementById('langToggle');
+    toggle.classList.toggle('en-active', lang === 'en');
+    toggle.querySelectorAll('span').forEach(s => {
+      s.classList.toggle('active', s.getAttribute('data-lang') === lang);
+    });
+  }
+
+  function toggleLang() {
+    setLanguage(currentLang === 'it' ? 'en' : 'it');
+  }
+
+  /* ============================================================
+     PRODUCT FILTER
+     ============================================================ */
+  const productCards = document.querySelectorAll('.product-card');
+  const chips = document.querySelectorAll('.chip');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.getAttribute('data-filter');
+
+      productCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+          card.style.animation = 'none';
+          void card.offsetWidth;
+          card.style.animation = 'scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  /* ============================================================
+     HEADER SCROLL
+     ============================================================ */
+  const headerWrapper = document.getElementById('headerWrapper');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) headerWrapper.classList.add('scrolled');
+    else headerWrapper.classList.remove('scrolled');
+  });
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  /* ============================================================
+     SMOOTH SCROLL
+     ============================================================ */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const headerOffset = 100;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ============================================================
+     LAZY LOADING
+     ============================================================ */
+  if ('loading' in HTMLImageElement.prototype) {
+    document.querySelectorAll('img').forEach(img => { if (!img.loading) img.loading = 'lazy'; });
+  }
+
+  /* ============================================================
+     PARALLAX HERO
+     ============================================================ */
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroMain = document.querySelector('.hero-img-main');
+    const heroSec = document.querySelector('.hero-img-secondary');
+    const heroTer = document.querySelector('.hero-img-tertiary');
+    if (heroMain && scrolled < 800) {
+      heroMain.style.transform = `translateY(${scrolled * 0.04}px)`;
+      if (heroSec) heroSec.style.transform = `translateY(${-scrolled * 0.03}px)`;
+      if (heroTer) heroTer.style.transform = `translateY(${scrolled * 0.05}px)`;
+    }
+  });
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  setLanguage('it');
+</script>
+
+</body>
+</html>
